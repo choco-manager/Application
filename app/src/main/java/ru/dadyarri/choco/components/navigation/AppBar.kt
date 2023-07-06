@@ -7,6 +7,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -16,7 +17,7 @@ import androidx.navigation.compose.rememberNavController
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar() {
+fun AppBar(isInDarkTheme: MutableState<Boolean>) {
     val navController = rememberNavController()
     val navItems =
         listOf(Screen.Home, Screen.Orders, Screen.Shipments, Screen.Warehouse, Screen.Profile)
@@ -41,7 +42,7 @@ fun AppBar() {
         }
 
     }) { innerPadding ->
-        AppNavHost(navController = navController, innerPadding = innerPadding)
+        AppNavHost(navController = navController, innerPadding = innerPadding, isInDarkTheme)
     }
 
 }
