@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Choco Manager</string>
+
+    <string name="page_home">Главная</string>
+    <string name="page_orders">Заказы</string>
+    <string name="page_shipments">Поставки</string>
+    <string name="page_profile">Профиль</string>
 </resources>
