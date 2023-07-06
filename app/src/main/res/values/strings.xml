@@ -5,4 +5,5 @@
     <string name="page_orders">Заказы</string>
     <string name="page_shipments">Поставки</string>
     <string name="page_profile">Профиль</string>
+    <string name="page_warehouse">Склад</string>
 </resources>

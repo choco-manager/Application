@@ -10,6 +10,7 @@ import ru.dadyarri.choco.pages.HomePage
 import ru.dadyarri.choco.pages.OrdersPage
 import ru.dadyarri.choco.pages.ProfilePage
 import ru.dadyarri.choco.pages.ShipmentsPage
+import ru.dadyarri.choco.pages.WarehousePage
 
 @Composable
 fun AppNavHost(navController: NavHostController, innerPadding: PaddingValues) {
@@ -21,6 +22,7 @@ fun AppNavHost(navController: NavHostController, innerPadding: PaddingValues) {
         composable("home") { HomePage() }
         composable("orders") { OrdersPage() }
         composable("shipments") { ShipmentsPage() }
+        composable("warehouse") { WarehousePage() }
         composable("profile") { ProfilePage() }
     }
 }

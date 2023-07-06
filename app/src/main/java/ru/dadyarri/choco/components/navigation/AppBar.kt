@@ -18,7 +18,8 @@ import androidx.navigation.compose.rememberNavController
 @Composable
 fun AppBar() {
     val navController = rememberNavController()
-    val navItems = listOf(Screen.Home, Screen.Orders, Screen.Shipments, Screen.Profile)
+    val navItems =
+        listOf(Screen.Home, Screen.Orders, Screen.Shipments, Screen.Warehouse, Screen.Profile)
 
     Scaffold(bottomBar = {
         NavigationBar {
@@ -30,6 +31,7 @@ fun AppBar() {
                         text = stringResource(item.labelId)
                     )
                 },
+                    alwaysShowLabel = false,
                     selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
                     onClick = {
                         navController.navigate(item.route) {
