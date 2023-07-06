@@ -26,12 +26,7 @@ fun AppBar() {
             val navBackStackEntry by navController.currentBackStackEntryAsState()
             val currentDestination = navBackStackEntry?.destination
             navItems.forEach { item ->
-                NavigationBarItem(icon = { Icon(item.icon, contentDescription = null) }, label = {
-                    Text(
-                        text = stringResource(item.labelId)
-                    )
-                },
-                    alwaysShowLabel = false,
+                NavigationBarItem(icon = { Icon(item.icon, contentDescription = null) },
                     selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
                     onClick = {
                         navController.navigate(item.route) {
