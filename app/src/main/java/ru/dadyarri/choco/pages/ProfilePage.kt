@@ -19,11 +19,14 @@ import ru.dadyarri.choco.components.SwitchWithLabel
 import ru.dadyarri.choco.pageWrapper.PageWrapper
 
 @Composable
-fun ProfilePage(isInDarkTheme: MutableState<Boolean>) {
+fun ProfilePage(isInDarkTheme: MutableState<Boolean>, isWholesalePricesEnabled: MutableState<Boolean>) {
     PageWrapper(stringResource(R.string.page_profile)) {
         Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             SwitchWithLabel(label = "Тёмная тема", state = isInDarkTheme.value, onStateChange = {
                 isInDarkTheme.value = it
+            })
+            SwitchWithLabel(label = "Отображать оптовые цены", state = isWholesalePricesEnabled.value, onStateChange = {
+                isWholesalePricesEnabled.value = it
             })
             Divider()
             Row(
