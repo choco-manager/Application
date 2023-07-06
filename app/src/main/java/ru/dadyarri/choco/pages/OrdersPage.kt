@@ -1,9 +1,13 @@
 package ru.dadyarri.choco.pages
 
 import androidx.compose.runtime.Composable
-import ru.dadyarri.choco.Greeting
+import androidx.compose.ui.res.stringResource
+import ru.dadyarri.choco.R
+import ru.dadyarri.choco.pageWrapper.PageWrapper
 
 @Composable
 fun OrdersPage() {
-    Greeting(name = "Orders")
+    PageWrapper(stringResource(R.string.page_orders)) {
+
+    }
 }
