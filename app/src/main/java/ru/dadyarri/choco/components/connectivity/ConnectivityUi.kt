@@ -1,5 +1,8 @@
 package ru.dadyarri.choco.components.connectivity
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -32,7 +35,7 @@ fun ConnectivityUi() {
     var isVisible by remember { mutableStateOf(isConnected) }
 
     if (isConnected) {
-        if (isVisible) {
+        AnimatedVisibility(visible = isVisible) {
             Row(
                 Modifier
                     .background(MaterialTheme.colorScheme.secondary)
