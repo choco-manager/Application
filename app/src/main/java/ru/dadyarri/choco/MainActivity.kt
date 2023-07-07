@@ -12,7 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import ru.dadyarri.choco.components.navigation.AppBar
+import ru.dadyarri.choco.components.navigation.AppStructure
 import ru.dadyarri.choco.ui.theme.ChocoManagerTheme
 
 class MainActivity : ComponentActivity() {
@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    AppBar(isInDarkTheme)
+                    AppStructure(isInDarkTheme)
                 }
             }
         }
