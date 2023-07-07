@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -25,17 +26,19 @@ fun AppStructure(isInDarkTheme: MutableState<Boolean>) {
 
     Scaffold(
         topBar = {
-                 CenterAlignedTopAppBar(
-                     title = { Text(text = "ChocoManager")},
-                     scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-                 )
+            CenterAlignedTopAppBar(
+                title = { Text(text = "ChocoManager") },
+                scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+            )
         },
         bottomBar = {
             NavigationBar {
                 val navBackStackEntry by navController.currentBackStackEntryAsState()
                 val currentDestination = navBackStackEntry?.destination
                 navItems.forEach { item ->
-                    NavigationBarItem(icon = { Icon(item.icon, contentDescription = null) },
+                    NavigationBarItem(
+                        icon = { Icon(item.icon, contentDescription = null) },
+                        label = { Text(text = stringResource(item.labelId)) },
                         selected = currentDestination?.hierarchy?.any { it.route == item.route } == true,
                         onClick = {
                             navController.navigate(item.route) {
