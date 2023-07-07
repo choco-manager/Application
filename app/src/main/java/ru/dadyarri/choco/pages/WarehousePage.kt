@@ -5,12 +5,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import ru.dadyarri.choco.R
 import ru.dadyarri.choco.components.warehouse.ProductCard
 import ru.dadyarri.choco.entities.Product
-import ru.dadyarri.choco.pageWrapper.PageWrapper
 
 @Composable
 fun WarehousePage(isWholesalePricesEnabled: MutableState<Boolean>) {
@@ -135,14 +132,12 @@ fun WarehousePage(isWholesalePricesEnabled: MutableState<Boolean>) {
             isByWeight = false
         ),
     )
-    PageWrapper(stringResource(R.string.page_warehouse)) {
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(15.dp)) {
-            items(products) { product ->
-                ProductCard(
-                    product = product,
-                    isWholesalePricesEnabled = isWholesalePricesEnabled.value
-                )
-            }
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(15.dp)) {
+        items(products) { product ->
+            ProductCard(
+                product = product,
+                isWholesalePricesEnabled = isWholesalePricesEnabled.value
+            )
         }
     }
 }
