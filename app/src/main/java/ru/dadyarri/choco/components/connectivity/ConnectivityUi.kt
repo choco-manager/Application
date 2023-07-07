@@ -6,6 +6,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.SignalWifi4Bar
+import androidx.compose.material.icons.rounded.SignalWifiStatusbarConnectedNoInternet4
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -37,10 +41,16 @@ fun ConnectivityUi() {
             Row(
                 Modifier
                     .background(MaterialTheme.colorScheme.secondary)
-                    .padding(5.dp)
+                    .padding(10.dp)
                     .fillMaxWidth(),
                 horizontalArrangement = Arrangement.Center
             ) {
+                Icon(
+                    Icons.Rounded.SignalWifi4Bar,
+                    contentDescription = null,
+                    tint = MaterialTheme.colorScheme.onSecondary,
+                    modifier = Modifier.padding(horizontal = 5.dp)
+                )
                 Text(
                     text = stringResource(R.string.connectivity_avalable),
                     textAlign = TextAlign.Center,
@@ -57,10 +67,16 @@ fun ConnectivityUi() {
         Row(
             Modifier
                 .background(MaterialTheme.colorScheme.error)
-                .padding(5.dp)
+                .padding(10.dp)
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ) {
+            Icon(
+                Icons.Rounded.SignalWifiStatusbarConnectedNoInternet4,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.onError,
+                modifier = Modifier.padding(horizontal = 5.dp)
+            )
             Text(
                 text = stringResource(R.string.connectivity_unavailable),
                 textAlign = TextAlign.Center,
