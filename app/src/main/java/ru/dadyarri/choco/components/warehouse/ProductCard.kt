@@ -5,7 +5,7 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import ru.dadyarri.choco.entities.Product
+import ru.dadyarri.choco.data.entities.Product
 
 @Composable
 fun ProductCard(product: Product, isWholesalePricesEnabled: Boolean) {

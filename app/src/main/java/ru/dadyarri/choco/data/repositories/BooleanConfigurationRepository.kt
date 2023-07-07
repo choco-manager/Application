@@ -1,8 +1,8 @@
-package ru.dadyarri.choco.repositories
+package ru.dadyarri.choco.data.repositories
 
 import kotlinx.coroutines.flow.Flow
-import ru.dadyarri.choco.daos.BooleanConfigurationDao
-import ru.dadyarri.choco.entities.BooleanConfiguration
+import ru.dadyarri.choco.data.daos.BooleanConfigurationDao
+import ru.dadyarri.choco.data.entities.BooleanConfiguration
 import ru.dadyarri.choco.enumerations.ConfigurationKeys
 
 class BooleanConfigurationRepository(private val dao: BooleanConfigurationDao) :

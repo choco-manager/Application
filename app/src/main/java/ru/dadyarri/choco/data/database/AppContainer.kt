@@ -1,7 +1,7 @@
-package ru.dadyarri.choco.database
+package ru.dadyarri.choco.data.database
 
 import android.content.Context
-import ru.dadyarri.choco.repositories.BooleanConfigurationRepository
+import ru.dadyarri.choco.data.repositories.BooleanConfigurationRepository
 
 interface IAppContainer {
     val booleanConfigurationRepository: BooleanConfigurationRepository

@@ -1,4 +1,4 @@
-package ru.dadyarri.choco.daos
+package ru.dadyarri.choco.data.daos
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -6,7 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import kotlinx.coroutines.flow.Flow
-import ru.dadyarri.choco.entities.BooleanConfiguration
+import ru.dadyarri.choco.data.entities.BooleanConfiguration
 import ru.dadyarri.choco.enumerations.ConfigurationKeys
 
 @Dao

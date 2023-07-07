@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.unit.dp
 import ru.dadyarri.choco.components.warehouse.ProductCard
-import ru.dadyarri.choco.entities.Product
+import ru.dadyarri.choco.data.entities.Product
 
 @Composable
 fun WarehousePage(isWholesalePricesEnabled: MutableState<Boolean>) {

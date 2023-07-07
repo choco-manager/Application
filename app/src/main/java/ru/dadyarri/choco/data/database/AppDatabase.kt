@@ -1,11 +1,11 @@
-package ru.dadyarri.choco.database
+package ru.dadyarri.choco.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.dadyarri.choco.daos.BooleanConfigurationDao
-import ru.dadyarri.choco.entities.BooleanConfiguration
+import ru.dadyarri.choco.data.daos.BooleanConfigurationDao
+import ru.dadyarri.choco.data.entities.BooleanConfiguration
 
 @Database(entities = [BooleanConfiguration::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {

@@ -1,5 +1,6 @@
 package ru.dadyarri.choco.components.navigation
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -16,6 +17,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import ru.dadyarri.choco.components.connectivity.ConnectivityUi
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -26,10 +28,13 @@ fun AppStructure(isInDarkTheme: MutableState<Boolean>) {
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text(text = "ChocoManager") },
-                scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-            )
+            Column {
+                CenterAlignedTopAppBar(
+                    title = { Text(text = "ChocoManager") },
+                    scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
+                )
+                ConnectivityUi()
+            }
         },
         bottomBar = {
             NavigationBar {

@@ -1,4 +1,4 @@
-package ru.dadyarri.choco.entities
+package ru.dadyarri.choco.data.entities
 
 data class Product(
     val title: String,
