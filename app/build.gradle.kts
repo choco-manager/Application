@@ -1,3 +1,7 @@
+val majorVersion = 1
+val minorVersion = 0
+val patchVersion = 0
+
 plugins {
     id("com.android.application") version "8.0.2"
     kotlin("android") version "1.8.20"
@@ -12,8 +16,8 @@ android {
         applicationId = "ru.dadyarri.choco"
         minSdk = 29
         targetSdk = 33
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = majorVersion * 10000 + minorVersion * 100 + patchVersion
+        versionName = "$majorVersion.$minorVersion.$patchVersion"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
@@ -23,12 +27,22 @@ android {
         debug {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
+            resValue(
+                "string",
+                "app_version",
+                "${defaultConfig.versionName}${versionNameSuffix}"
+            )
         }
         release {
             isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
+            )
+            resValue(
+                "string",
+                "app_version",
+                "${defaultConfig.versionName}"
             )
         }
     }
