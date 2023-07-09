@@ -6,7 +6,9 @@ plugins {
     id("com.android.application") version "8.0.2"
     id("com.google.devtools.ksp") version "1.8.20-1.0.11"
     kotlin("android") version "1.8.20"
+    kotlin("kapt") version "1.8.20"
     kotlin("plugin.serialization") version "1.8.20"
+    id("com.google.dagger.hilt.android") version "2.44"
 }
 
 @Suppress("UnstableApiUsage", "OldTargetApi")
@@ -98,4 +100,12 @@ dependencies {
     // Material Design
     implementation("androidx.compose.material3:material3")
     implementation("androidx.compose.material:material-icons-extended-android:1.5.0-beta03")
+
+    // Dagger (DI)
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
+}
+
+kapt {
+    correctErrorTypes = true
 }
