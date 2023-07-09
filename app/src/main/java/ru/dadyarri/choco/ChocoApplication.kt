@@ -4,7 +4,7 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class ChocoApplication: Application() {
+class ChocoApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
