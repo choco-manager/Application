@@ -4,7 +4,7 @@ val patchVersion = 0
 
 plugins {
     id("com.android.application") version "8.0.2"
-    id("com.google.devtools.ksp") version "1.8.10-1.0.9"
+    id("com.google.devtools.ksp") version "1.8.20-1.0.11"
     kotlin("android") version "1.8.20"
     kotlin("plugin.serialization") version "1.8.20"
 }
