@@ -6,6 +6,7 @@ plugins {
     id("com.android.application") version "8.0.2"
     id("com.google.devtools.ksp") version "1.8.10-1.0.9"
     kotlin("android") version "1.8.20"
+    kotlin("plugin.serialization") version "1.8.20"
 }
 
 @Suppress("UnstableApiUsage", "OldTargetApi")
@@ -92,6 +93,7 @@ dependencies {
 
     // DataStore
     implementation("androidx.datastore:datastore:1.0.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
 
     // Material Design
     implementation("androidx.compose.material3:material3")
