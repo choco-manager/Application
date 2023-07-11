@@ -95,8 +95,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview")
 
     // DataStore
-    implementation("androidx.datastore:datastore:1.0.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // Material Design
     implementation("androidx.compose.material3:material3")
