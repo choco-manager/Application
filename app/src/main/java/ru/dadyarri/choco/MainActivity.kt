@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -58,7 +59,13 @@ class MainActivity : ComponentActivity() {
             var lightThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.LIGHT) }
             var systemThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.FOLLOW_SYSTEM) }
 
-            ChocoManagerTheme {
+            ChocoManagerTheme(
+                darkTheme = when (prefs.darkThemeConfig) {
+                    DarkThemeConfig.DARK -> true
+                    DarkThemeConfig.LIGHT -> false
+                    DarkThemeConfig.FOLLOW_SYSTEM -> isSystemInDarkTheme()
+                }
+            ) {
                 // A surface container using the 'background' color from the theme
                 Scaffold(topBar = {
                     CenterAlignedTopAppBar(title = { Text(text = "ChocoManager") })
@@ -134,10 +141,12 @@ class MainActivity : ComponentActivity() {
                                     }
                                 )
                                 ListItem(
-                                    leadingContent = { androidx.compose.material3.Icon(
-                                        imageVector = Icons.Rounded.Settings,
-                                        contentDescription = null
-                                    )},
+                                    leadingContent = {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Settings,
+                                            contentDescription = null
+                                        )
+                                    },
                                     headlineText = { Text(text = "Как в системе") },
                                     trailingContent = {
                                         RadioButton(
