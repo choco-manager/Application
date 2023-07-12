@@ -25,7 +25,7 @@ class DependencyInjection {
         return PreferenceDataStoreFactory.create(
             corruptionHandler = ReplaceFileCorruptionHandler(produceNewData = { emptyPreferences() }),
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
-            produceFile = {context.preferencesDataStoreFile("user_preferences")}
+            produceFile = { context.preferencesDataStoreFile("user_preferences") }
         )
     }
 }
