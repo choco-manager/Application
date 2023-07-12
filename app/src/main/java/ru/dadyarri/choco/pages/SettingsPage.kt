@@ -24,7 +24,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.dadyarri.choco.MainActivityViewModel
 import ru.dadyarri.choco.core.model.data.DarkThemeConfig
 import ru.dadyarri.choco.core.model.data.ServerConfig
@@ -32,7 +32,7 @@ import ru.dadyarri.choco.core.model.data.ServerConfig
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SettingsPage(viewModel: MainActivityViewModel = viewModel()) {
+fun SettingsPage(viewModel: MainActivityViewModel = hiltViewModel()) {
     val prefs = viewModel.getPreferences().collectAsState().value
     var themeDialogShowed by remember { mutableStateOf(false) }
     var serverDialogShowed by remember { mutableStateOf(false) }
