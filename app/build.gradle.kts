@@ -87,6 +87,7 @@ dependencies {
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     // AndroidX Lifecycle and Compose
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
@@ -105,6 +106,7 @@ dependencies {
 
     // Dagger (DI)
     implementation("com.google.dagger:hilt-android:2.44")
+    implementation("androidx.hilt:hilt-navigation-compose:1.0.0")
     kapt("com.google.dagger:hilt-android-compiler:2.44")
 
     // Accompanist
