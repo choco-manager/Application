@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.BugReport
 import androidx.compose.material.icons.rounded.ChevronRight
+import androidx.compose.material.icons.rounded.Domain
 import androidx.compose.material.icons.rounded.LightMode
 import androidx.compose.material.icons.rounded.ModeNight
 import androidx.compose.material.icons.rounded.Settings
@@ -38,6 +40,7 @@ import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
 import ru.dadyarri.choco.core.model.data.DarkThemeConfig
+import ru.dadyarri.choco.core.model.data.ServerConfig
 import ru.dadyarri.choco.ui.theme.ChocoManagerTheme
 
 @AndroidEntryPoint
@@ -55,9 +58,12 @@ class MainActivity : ComponentActivity() {
             val systemUiController = rememberSystemUiController()
             val prefs = viewModel.getPreferences().collectAsState().value
             var themeDialogShowed by remember { mutableStateOf(false) }
+            var serverDialogShowed by remember { mutableStateOf(false) }
             var darkThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.DARK) }
             var lightThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.LIGHT) }
             var systemThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.FOLLOW_SYSTEM) }
+            var productionServerSelected by remember { mutableStateOf(prefs.serverConfig == ServerConfig.PRODUCTION) }
+            var stageServerSelected by remember { mutableStateOf(prefs.serverConfig == ServerConfig.STAGE) }
 
             ChocoManagerTheme(
                 darkTheme = when (prefs.darkThemeConfig) {
@@ -82,6 +88,17 @@ class MainActivity : ComponentActivity() {
                                     themeDialogShowed = true
                                 }),
                                 headlineText = { Text(text = "Тема приложения") },
+                                trailingContent = {
+                                    Icon(
+                                        imageVector = Icons.Rounded.ChevronRight,
+                                        contentDescription = null
+                                    )
+                                })
+                            ListItem(
+                                modifier = Modifier.clickable(onClick = {
+                                    serverDialogShowed = true
+                                }),
+                                headlineText = { Text(text = "Сервер") },
                                 trailingContent = {
                                     Icon(
                                         imageVector = Icons.Rounded.ChevronRight,
@@ -166,6 +183,49 @@ class MainActivity : ComponentActivity() {
                                 Text(text = "Закрыть")
                             }
                         })
+                }
+                if (serverDialogShowed) {
+                    AlertDialog(onDismissRequest = { serverDialogShowed = false }, title = {
+                        Text(
+                            text = "Настройки сервера"
+                        )
+                    }, text = {
+                        Column {
+                            ListItem(
+                                leadingContent = {
+                                    Icon(
+                                        imageVector = Icons.Rounded.Domain,
+                                        contentDescription = null
+                                    )
+                                },
+                                headlineText = { Text(text = "Основной") },
+                                trailingContent = {
+                                    RadioButton(
+                                        selected = productionServerSelected,
+                                        onClick = {
+                                            productionServerSelected = true
+                                            stageServerSelected = false
+                                            viewModel.updateServerConfig(ServerConfig.PRODUCTION)
+                                        })
+                                })
+                            ListItem(
+                                leadingContent = { Icon(Icons.Rounded.BugReport, null) },
+                                headlineText = { Text(text = "Отладочный") },
+                                trailingContent = {
+                                    RadioButton(
+                                        selected = stageServerSelected,
+                                        onClick = {
+                                            productionServerSelected = false
+                                            stageServerSelected = true
+                                            viewModel.updateServerConfig(ServerConfig.STAGE)
+                                        })
+                                })
+                        }
+                    }, confirmButton = {
+                        TextButton(onClick = { serverDialogShowed = false }) {
+                            Text(text = "Закрыть")
+                        }
+                    })
                 }
             }
         }
