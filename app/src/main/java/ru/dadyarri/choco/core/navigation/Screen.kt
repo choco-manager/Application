@@ -10,11 +10,11 @@ import androidx.compose.material.icons.outlined.Warehouse
 import androidx.compose.ui.graphics.vector.ImageVector
 import ru.dadyarri.choco.R
 
-sealed class Screen(val route: String, @StringRes val title: Int, val icon: ImageVector) {
-    object Home : Screen("home", R.string.app_name, Icons.Outlined.Home)
-    object Orders : Screen("orders", R.string.page_orders, Icons.Outlined.CloudUpload)
-    object Shipments : Screen("orders", R.string.page_shipments, Icons.Outlined.CloudDownload)
-    object Warehouse : Screen("orders", R.string.page_warehouse, Icons.Outlined.Warehouse)
-    object Settings : Screen("orders", R.string.page_settings, Icons.Outlined.Settings)
+enum class Screen(val route: String, @StringRes val title: Int, val icon: ImageVector) {
+    Home("home", R.string.app_name, Icons.Outlined.Home),
+    Orders("orders", R.string.page_orders, Icons.Outlined.CloudUpload),
+    Shipments("orders", R.string.page_shipments, Icons.Outlined.CloudDownload),
+    Warehouse("orders", R.string.page_warehouse, Icons.Outlined.Warehouse),
+    Settings("orders", R.string.page_settings, Icons.Outlined.Settings),
 
 }
