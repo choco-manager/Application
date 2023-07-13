@@ -15,6 +15,7 @@ import dagger.hilt.components.SingletonComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import ru.dadyarri.choco.core.api.modules.products.repositories.ProductsRepository
 import javax.inject.Singleton
 
 @Module
@@ -29,5 +30,11 @@ class DependencyInjection {
             scope = CoroutineScope(Dispatchers.IO + SupervisorJob()),
             produceFile = { context.preferencesDataStoreFile("user_preferences") }
         )
+    }
+
+    @Provides
+    @Singleton
+    fun provideProductsRepository(): ProductsRepository {
+        return ProductsRepository()
     }
 }
