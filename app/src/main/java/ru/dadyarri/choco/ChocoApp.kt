@@ -26,7 +26,6 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hierarchy
 import ru.dadyarri.choco.core.navigation.ChocoNavHost
 import ru.dadyarri.choco.core.navigation.Screen
-import ru.dadyarri.choco.pages.SettingsPage
 import ru.dadyarri.choco.ui.ChocoAppState
 import ru.dadyarri.choco.ui.rememberAppState
 import ru.dadyarri.choco.util.INetworkMonitor
@@ -63,17 +62,6 @@ fun ChocoApp(
             if (currentDestination != null) {
                 CenterAlignedTopAppBar(title = { Text(text = stringResource(currentDestination.title)) })
             }
-            ChocoNavHost(
-                appState = appState,
-                onShowSnackbar = { message, action ->
-                    snackbarHostState.showSnackbar(
-                        message = message,
-                        actionLabel = action,
-                        duration = SnackbarDuration.Short
-                    ) == SnackbarResult.ActionPerformed
-                },
-                modifier = Modifier
-            )
         },
         bottomBar = {
             ChocoBottomAppBar(
@@ -90,7 +78,18 @@ fun ChocoApp(
                 .padding(it),
             color = MaterialTheme.colorScheme.background
         ) {
-            SettingsPage()
+
+            ChocoNavHost(
+                appState = appState,
+                onShowSnackbar = { message, action ->
+                    snackbarHostState.showSnackbar(
+                        message = message,
+                        actionLabel = action,
+                        duration = SnackbarDuration.Short
+                    ) == SnackbarResult.ActionPerformed
+                },
+                modifier = Modifier
+            )
         }
     }
 }
