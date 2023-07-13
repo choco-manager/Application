@@ -6,6 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ru.dadyarri.choco.pages.SettingsPage
+import ru.dadyarri.choco.pages.WarehousePage
 import ru.dadyarri.choco.ui.ChocoAppState
 
 @Composable
@@ -24,7 +25,7 @@ fun ChocoNavHost(
         composable("home") { Column {} }
         composable("orders") { Column {} }
         composable("shipments") { Column {} }
-        composable("warehouse") { Column {} }
+        composable("warehouse") { WarehousePage() }
         composable("settings") { SettingsPage() }
     }
 }
