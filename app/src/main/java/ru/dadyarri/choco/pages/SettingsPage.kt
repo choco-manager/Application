@@ -26,8 +26,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import ru.dadyarri.choco.MainActivityViewModel
-import ru.dadyarri.choco.core.model.data.DarkThemeConfig
-import ru.dadyarri.choco.core.model.data.ServerConfig
+import ru.dadyarri.choco.core.preferences.DarkThemeConfig
+import ru.dadyarri.choco.core.preferences.ServerConfig
 
 
 @OptIn(ExperimentalMaterial3Api::class)

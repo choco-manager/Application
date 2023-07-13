@@ -10,7 +10,7 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import dagger.hilt.android.AndroidEntryPoint
-import ru.dadyarri.choco.core.model.data.DarkThemeConfig
+import ru.dadyarri.choco.core.preferences.DarkThemeConfig
 import ru.dadyarri.choco.ui.theme.ChocoManagerTheme
 import ru.dadyarri.choco.util.INetworkMonitor
 import javax.inject.Inject

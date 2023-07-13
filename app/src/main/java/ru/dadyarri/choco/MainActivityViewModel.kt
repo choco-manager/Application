@@ -8,10 +8,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import ru.dadyarri.choco.core.model.data.DarkThemeConfig
-import ru.dadyarri.choco.core.model.data.ServerConfig
-import ru.dadyarri.choco.core.model.data.UserPreferences
-import ru.dadyarri.choco.core.model.data.UserPreferencesRepository
+import ru.dadyarri.choco.core.preferences.DarkThemeConfig
+import ru.dadyarri.choco.core.preferences.ServerConfig
+import ru.dadyarri.choco.core.preferences.UserPreferences
+import ru.dadyarri.choco.core.preferences.UserPreferencesRepository
 import javax.inject.Inject
 
 @HiltViewModel

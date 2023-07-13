@@ -1,4 +1,4 @@
-package ru.dadyarri.choco.core.model.data
+package ru.dadyarri.choco.core.preferences
 
 data class UserPreferences(
     val darkThemeConfig: DarkThemeConfig,

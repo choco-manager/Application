@@ -1,4 +1,4 @@
-package ru.dadyarri.choco.core.model.data
+package ru.dadyarri.choco.core.preferences
 
 enum class ServerConfig {
     PRODUCTION, STAGE
