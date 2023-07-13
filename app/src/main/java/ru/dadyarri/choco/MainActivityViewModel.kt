@@ -39,12 +39,6 @@ class MainActivityViewModel @Inject constructor(private val userPreferencesRepos
         return userPreferences
     }
 
-    fun showWholesalePrices(show: Boolean) {
-        viewModelScope.launch {
-            userPreferencesRepository.updateShowWholesalePrices(show)
-        }
-    }
-
     fun updateDarkThemeConfig(config: DarkThemeConfig) {
         viewModelScope.launch {
             userPreferencesRepository.updateDarkThemeConfig(config)
