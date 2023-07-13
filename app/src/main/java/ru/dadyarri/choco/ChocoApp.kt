@@ -49,6 +49,11 @@ fun ChocoApp(
                 "Нет подключения к интернету",
                 duration = SnackbarDuration.Indefinite
             )
+        } else {
+            snackbarHostState.showSnackbar(
+                "Подключение восстановлено",
+                duration = SnackbarDuration.Short
+            )
         }
     }
 
