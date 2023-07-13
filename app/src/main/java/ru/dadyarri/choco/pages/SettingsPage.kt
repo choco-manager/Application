@@ -15,6 +15,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -41,6 +42,7 @@ fun SettingsPage(viewModel: MainActivityViewModel = hiltViewModel()) {
     var systemThemeSelected by remember { mutableStateOf(prefs.darkThemeConfig == DarkThemeConfig.FOLLOW_SYSTEM) }
     var productionServerSelected by remember { mutableStateOf(prefs.serverConfig == ServerConfig.PRODUCTION) }
     var stageServerSelected by remember { mutableStateOf(prefs.serverConfig == ServerConfig.STAGE) }
+    var wholesalePricesSwitch by remember { mutableStateOf(prefs.showWholesalePrices) }
     Column {
         ListItem(
             modifier = Modifier.clickable(onClick = {
@@ -63,6 +65,18 @@ fun SettingsPage(viewModel: MainActivityViewModel = hiltViewModel()) {
                     imageVector = Icons.Rounded.ChevronRight,
                     contentDescription = null
                 )
+            })
+        ListItem(
+            headlineText = { Text(text = "Оптовые цены") },
+            trailingContent = {
+                Switch(
+                    checked = wholesalePricesSwitch,
+                    onCheckedChange = {
+                        wholesalePricesSwitch =
+                            !wholesalePricesSwitch; viewModel.updateWholesalePricesShowed(
+                        wholesalePricesSwitch
+                    )
+                    })
             })
     }
     if (themeDialogShowed) {

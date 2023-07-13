@@ -57,6 +57,12 @@ class MainActivityViewModel @Inject constructor(private val userPreferencesRepos
         }
     }
 
+    fun updateWholesalePricesShowed(value: Boolean) {
+        viewModelScope.launch {
+            userPreferencesRepository.updateShowWholesalePrices(value)
+        }
+    }
+
 }
 
 sealed interface MainActivityUiState {
