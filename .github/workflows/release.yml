@@ -102,6 +102,11 @@ jobs:
           name: app
           path: "${{ github.workspace }}/dist/ChocoManager.apk"
 
+      - name: List files
+        run: |
+          ls "${{ github.workspace }}"
+          ls ""${{ github.workspace }}/dist"
+
       - name: Create Release
         if: ${{ !env.ACT }}
         id: create_release
