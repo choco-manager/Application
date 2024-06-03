@@ -100,7 +100,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app
-          path: "ChocoManager.apk"
+          path: ./ChocoManager.apk
 
       - name: List files
         run: ls -la
@@ -115,4 +115,4 @@ jobs:
           tag_name: ${{ github.ref }}
           body: ${{ needs.changelog.outputs.release_body }}
           name: "Версия ${{ needs.changelog.outputs.version }}"
-          files: "ChocoManager.apk"
+          files: ./ChocoManager.apk
