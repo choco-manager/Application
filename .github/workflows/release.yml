@@ -102,6 +102,9 @@ jobs:
           name: app
           path: "ChocoManager.apk"
 
+      - name: List files
+        run: ls -la
+
       - name: Create Release
         if: ${{ !env.ACT }}
         id: create_release
