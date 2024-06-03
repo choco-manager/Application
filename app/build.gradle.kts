@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.api.BaseVariantOutputImpl
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -25,7 +27,7 @@ android {
 
     signingConfigs {
         create("release") {
-            storeFile = file("keystore/ru.unilms.jks")
+            storeFile = file("keystore/ru.dadyarri.jks")
             storePassword = System.getenv("SIGNING_STORE_PASSWORD")
             keyAlias = System.getenv("SIGNING_KEY_ALIAS")
             keyPassword = System.getenv("SIGNING_KEY_PASSWORD")
@@ -48,6 +50,21 @@ android {
             signingConfig = signingConfigs.getByName("release")
             manifestPlaceholders["appAuthority"] =
                 "${defaultConfig.applicationId}.fileprovider"
+            applicationVariants.all {
+                val variant = this
+                variant.outputs
+                    .map { it as BaseVariantOutputImpl }
+                    .forEach { output ->
+                        val outputFileName =
+                            "${
+                                rootProject.name.replace(
+                                    " ",
+                                    ""
+                                )
+                            }.apk"
+                        output.outputFileName = outputFileName
+                    }
+            }
         }
 
         getByName("debug") {
