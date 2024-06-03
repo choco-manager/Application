@@ -23,6 +23,6 @@ fun ChocoApp(snackbarMessageHandler: SnackbarMessageHandler) {
     }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Greeting(name = "Hello", modifier = Modifier.padding(innerPadding))
+        Greeting(name = "Android", modifier = Modifier.padding(innerPadding))
     }
 }
