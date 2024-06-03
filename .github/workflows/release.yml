@@ -105,7 +105,8 @@ jobs:
       - name: List files
         run: |
           ls "${{ github.workspace }}"
-          ls ""${{ github.workspace }}/dist"
+          echo "---"
+          ls "${{ github.workspace }}/dist"
 
       - name: Create Release
         if: ${{ !env.ACT }}
