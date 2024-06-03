@@ -100,13 +100,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: app
-          path: "${{ github.workspace }}/dist/ChocoManager.apk"
-
-      - name: List files
-        run: |
-          ls "${{ github.workspace }}"
-          echo "---"
-          ls "${{ github.workspace }}/dist"
+          path: "ChocoManager.apk"
 
       - name: Create Release
         if: ${{ !env.ACT }}
@@ -118,4 +112,4 @@ jobs:
           tag_name: ${{ github.ref }}
           body: ${{ needs.changelog.outputs.release_body }}
           name: "Версия ${{ needs.changelog.outputs.version }}"
-          files: "${{ github.workspace }}/dist/ChocoManager.apk"
+          files: "ChocoManager.apk"
