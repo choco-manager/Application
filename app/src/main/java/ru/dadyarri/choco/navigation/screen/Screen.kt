@@ -7,20 +7,20 @@ import androidx.compose.material.icons.outlined.Menu
 import androidx.compose.ui.graphics.vector.ImageVector
 import ru.dadyarri.choco.navigation.routes.Route
 
-enum class Screen(val icon: ImageVector?, val config: ScreenConfig, val route: Route) {
+enum class Screen(val icon: ImageVector?, val position: ScreenPosition, val route: Route) {
     Orders(
-        Icons.Outlined.CloudDownload,
-        ScreenConfig(showBottomBar = true, ScreenPosition.Bottom),
-        Route.Orders
+        icon = Icons.Outlined.CloudDownload,
+        position = ScreenPosition.Bottom,
+        route = Route.Orders
     ),
     Procurements(
-        Icons.Outlined.CloudUpload,
-        ScreenConfig(showBottomBar = true, ScreenPosition.Bottom),
-        Route.Procurements
+        icon = Icons.Outlined.CloudUpload,
+        position = ScreenPosition.Bottom,
+        route = Route.Procurements
     ),
     Menu(
-        Icons.Outlined.Menu,
-        ScreenConfig(showBottomBar = true, ScreenPosition.Bottom),
-        Route.Menu
+        icon = Icons.Outlined.Menu,
+        position = ScreenPosition.Bottom,
+        route = Route.Menu
     )
 }

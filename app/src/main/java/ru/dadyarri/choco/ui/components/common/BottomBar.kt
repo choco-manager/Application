@@ -20,7 +20,7 @@ fun BottomBar(navController: NavHostController) {
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = backStackEntry?.destination
     NavigationBar {
-        enumValues<Screen>().filter { screen -> screen.icon != null && screen.config.position == ScreenPosition.Bottom }
+        enumValues<Screen>().filter { screen -> screen.icon != null && screen.position == ScreenPosition.Bottom }
             .forEach { screen ->
                 val isSelected =
                     currentDestination?.hierarchy?.any { it.route == screen.name } == true
