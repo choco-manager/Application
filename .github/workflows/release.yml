@@ -55,11 +55,17 @@ jobs:
         run: |
           $ANDROID_SDK_ROOT/build-tools/33.0.1/apksigner verify --print-certs "${{ github.workspace }}/app/build/outputs/apk/release/ChocoManager.apk"
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Create Release
+        if: ${{ !env.ACT }}
+        id: create_release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          name: app
-          path: "${{ github.workspace }}/app/build/outputs/apk/release/ChocoManager.apk"
+          tag_name: ${{ github.ref }}
+          body: ${{ needs.changelog.outputs.release_body }}
+          name: "Версия ${{ needs.changelog.outputs.version }}"
+          files: "${{ github.workspace }}/app/build/outputs/apk/release/ChocoManager.apk"
 
 
   changelog:
@@ -81,38 +87,3 @@ jobs:
         env:
           OUTPUT: CHANGES.md
           GITHUB_REPO: ${{ github.repository }}
-          
-  release:
-    runs-on: ubuntu-latest
-    permissions: 
-      contents: write
-    needs:
-      - changelog
-      - build
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: app
-          path: ./ChocoManager.apk
-
-      - name: List files
-        run: ls -la
-
-      - name: Create Release
-        if: ${{ !env.ACT }}
-        id: create_release
-        uses: softprops/action-gh-release@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          body: ${{ needs.changelog.outputs.release_body }}
-          name: "Версия ${{ needs.changelog.outputs.version }}"
-          files: ./ChocoManager.apk
