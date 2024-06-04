@@ -32,7 +32,7 @@ fun LoginScreen(
 ) {
 
 
-    BaseScreen(verticalArrangement = Arrangement.Center) {
+
         OutlinedTextField(
             value = state.login,
             onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Login, it)) },
@@ -108,5 +108,5 @@ fun LoginScreen(
             Text(text = stringResource(R.string.log_in))
         }
 
-    }
+
 }
