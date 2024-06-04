@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import ru.dadyarri.choco.ui.actions.RestorePasswordAction
 import ru.dadyarri.choco.ui.state.RestorePasswordState
 import javax.inject.Inject
 
@@ -13,5 +14,9 @@ class RestorePasswordViewModel @Inject constructor(
 
     private val _state = MutableStateFlow(RestorePasswordState())
     val state = _state.asStateFlow()
+
+    fun onAction(action: RestorePasswordAction) {
+
+    }
 
 }

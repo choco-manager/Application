@@ -2,8 +2,6 @@ package ru.dadyarri.choco.ui.state
 
 import ru.dadyarri.choco.R
 import ru.dadyarri.choco.common.UiText
-import ru.dadyarri.choco.navigation.screen.ScreenConfig
-import ru.dadyarri.choco.navigation.screen.ScreenPosition
 
 data class LoginState(
     val title: UiText = UiText.StringResource(R.string.login_screen),
@@ -13,9 +11,5 @@ data class LoginState(
     val login: String = "",
     val loginError: UiText? = null,
     val password: String = "",
-    val passwordError: UiText? = null,
-    val screenConfig: ScreenConfig = ScreenConfig(
-        showBottomBar = false,
-        position = ScreenPosition.None
-    )
+    val passwordError: UiText? = null
 )
