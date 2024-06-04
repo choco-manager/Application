@@ -24,6 +24,7 @@ import ru.dadyarri.choco.viewmodels.LoginViewModel
 @Composable
 fun ChocoApp(
     snackbarMessageHandler: SnackbarMessageHandler,
+    navigationHandler: NavigationHandler,
     navController: NavHostController = rememberNavController()
 ) {
 
@@ -32,6 +33,12 @@ fun ChocoApp(
     LaunchedEffect(snackbarMessageHandler) {
         snackbarMessageHandler.message.collect { message ->
             snackbarHostState.showSnackbar(message)
+        }
+    }
+
+    LaunchedEffect(navigationHandler) {
+        navigationHandler.destination.collect { destination ->
+            navController.navigate(destination)
         }
     }
 
@@ -47,6 +54,13 @@ fun ChocoApp(
 
                 LoginScreen(st, vm::onAction)
             }
+
+            composable<Route.RestorePassword> {
+                BaseScreen {
+                    Greeting(name = "Restore password")
+                }
+            }
+
         }
     }
 }
