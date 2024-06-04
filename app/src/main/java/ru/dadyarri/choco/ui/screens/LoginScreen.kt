@@ -11,6 +11,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -91,6 +92,10 @@ fun LoginScreen(
                 }
             }
         )
+
+        TextButton(onClick = { onAction(LoginAction.ForgotPassword) }) {
+            Text(text = stringResource(R.string.forgot_password))
+        }
 
         Button(
             modifier = Modifier.fillMaxWidth(),
