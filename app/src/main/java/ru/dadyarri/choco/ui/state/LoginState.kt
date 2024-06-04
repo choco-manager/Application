@@ -1,10 +1,12 @@
 package ru.dadyarri.choco.ui.state
 
+import ru.dadyarri.choco.R
 import ru.dadyarri.choco.common.UiText
 import ru.dadyarri.choco.navigation.screen.ScreenConfig
 import ru.dadyarri.choco.navigation.screen.ScreenPosition
 
 data class LoginState(
+    val title: UiText = UiText.StringResource(R.string.login_screen),
     val isRefreshing: Boolean = false,
     val isPasswordVisible: Boolean = false,
     val isFormEnabled: Boolean = true,
