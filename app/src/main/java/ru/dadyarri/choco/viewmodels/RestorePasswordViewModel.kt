@@ -5,38 +5,54 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
-import ru.dadyarri.choco.ui.actions.RequestPasswordRestorationAction
-import ru.dadyarri.choco.ui.form_fields.RequestPasswordRestorationFormField
-import ru.dadyarri.choco.ui.state.RequestPasswordRestorationState
+import ru.dadyarri.choco.ui.actions.RestorePasswordAction
+import ru.dadyarri.choco.ui.form_fields.RestorePasswordFormField
+import ru.dadyarri.choco.ui.state.RestorePasswordState
 import javax.inject.Inject
 
 @HiltViewModel
-class RestorePasswordViewModel @Inject constructor(
-) : ViewModel() {
+class RestorePasswordViewModel @Inject constructor() : ViewModel() {
 
-    private val _state = MutableStateFlow(RequestPasswordRestorationState())
+    private val _state = MutableStateFlow(RestorePasswordState())
     val state = _state.asStateFlow()
 
-    fun onAction(action: RequestPasswordRestorationAction) {
+    fun onAction(action: RestorePasswordAction) {
         when (action) {
-            is RequestPasswordRestorationAction.RequestRestoration -> onRequestRestoration()
-            is RequestPasswordRestorationAction.UpdateField<*> -> onUpdateField(action)
+            is RestorePasswordAction.Restore -> onRestore()
+            is RestorePasswordAction.UpdateField<*> -> onUpdateField(action)
+            is RestorePasswordAction.TogglePasswordVisibility -> onToggleVisibility()
         }
     }
 
-    private fun <T> onUpdateField(action: RequestPasswordRestorationAction.UpdateField<T>) {
+    private fun onToggleVisibility() {
+        _state.update {
+            it.copy(
+                isPasswordVisible = !it.isPasswordVisible
+            )
+        }
+    }
+
+    private fun <T> onUpdateField(action: RestorePasswordAction.UpdateField<T>) {
         when (action.field) {
-            is RequestPasswordRestorationFormField.Login -> {
+            is RestorePasswordFormField.Password -> {
                 _state.update {
                     it.copy(
-                        login = action.newValue as String
+                        password = action.newValue as String
+                    )
+                }
+            }
+
+            is RestorePasswordFormField.RepeatPassword -> {
+                _state.update {
+                    it.copy(
+                        repeatPassword = action.newValue as String
                     )
                 }
             }
         }
     }
 
-    private fun onRequestRestoration() {
+    private fun onRestore() {
 
     }
 
