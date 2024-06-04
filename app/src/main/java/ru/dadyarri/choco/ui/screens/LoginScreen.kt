@@ -1,5 +1,6 @@
 package ru.dadyarri.choco.ui.screens
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -31,7 +32,7 @@ fun LoginScreen(
 ) {
 
 
-    BaseScreen {
+    BaseScreen(verticalArrangement = Arrangement.Center) {
         OutlinedTextField(
             value = state.login,
             onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Login, it)) },
