@@ -6,14 +6,18 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ru.dadyarri.choco.navigation.routes.LoginRoute
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
+import ru.dadyarri.choco.viewmodels.LoginViewModel
 
 @Composable
 fun ChocoApp(
@@ -36,7 +40,10 @@ fun ChocoApp(
             modifier = Modifier.padding(innerPadding)
         ) {
             composable<LoginRoute> {
-                LoginScreen()
+                val vm: LoginViewModel = hiltViewModel()
+                val st by vm.state.collectAsState()
+
+                LoginScreen(st, vm::onAction)
             }
         }
     }
