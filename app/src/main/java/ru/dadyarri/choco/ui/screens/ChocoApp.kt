@@ -8,11 +8,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import ru.dadyarri.choco.navigation.routes.LoginRoute
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
-import ru.dadyarri.choco.ui.components.Greeting
 
 @Composable
-fun ChocoApp(snackbarMessageHandler: SnackbarMessageHandler) {
+fun ChocoApp(
+    snackbarMessageHandler: SnackbarMessageHandler,
+    navController: NavHostController = rememberNavController()
+) {
 
     val snackbarHostState = remember { SnackbarHostState() }
 
@@ -23,6 +30,14 @@ fun ChocoApp(snackbarMessageHandler: SnackbarMessageHandler) {
     }
 
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-        Greeting(name = "Android", modifier = Modifier.padding(innerPadding))
+        NavHost(
+            navController = navController,
+            startDestination = LoginRoute,
+            modifier = Modifier.padding(innerPadding)
+        ) {
+            composable<LoginRoute> {
+                LoginScreen()
+            }
+        }
     }
 }
