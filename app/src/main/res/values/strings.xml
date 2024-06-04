@@ -4,4 +4,6 @@
     <string name="password">Пароль</string>
     <string name="log_in">Войти</string>
     <string name="forgot_password">Забыли пароль?</string>
+    <string name="login_screen">Вход в аккаунт</string>
+    <string name="restore_password_screen">Восстановить пароль</string>
 </resources>
