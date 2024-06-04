@@ -22,7 +22,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
             is LoginAction.Login -> onLogin()
             is LoginAction.ForgotPassword -> onForgotPassword()
             is LoginAction.TogglePasswordVisibility -> onTogglePasswordVisibility()
-            is LoginAction.UpdateField<*> -> updateField(action)
+            is LoginAction.UpdateField<*> -> onUpdateField(action)
         }
     }
 
@@ -39,7 +39,7 @@ class LoginViewModel @Inject constructor() : ViewModel() {
         }
     }
 
-    private fun <T> updateField(action: LoginAction.UpdateField<T>) {
+    private fun <T> onUpdateField(action: LoginAction.UpdateField<T>) {
         when (action.field) {
             is LoginFormField.Login -> {
                 _state.update {
