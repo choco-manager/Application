@@ -41,8 +41,8 @@ fun ChocoApp(
             LoginScreenRoot(navController)
         }
 
-        composable<Route.RestorePassword> {
-            RestorePasswordScreenRoot(navController)
+        composable<Route.RequestPasswordRestoration> {
+            RequestPasswordRestorationScreenRoot(navController)
         }
     }
 }

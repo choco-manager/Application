@@ -6,7 +6,7 @@ sealed class Route {
     @Serializable
     data object Login: Route()
     @Serializable
-    data object RestorePassword: Route()
+    data object RequestPasswordRestoration : Route()
     @Serializable
     data object Orders: Route()
     @Serializable

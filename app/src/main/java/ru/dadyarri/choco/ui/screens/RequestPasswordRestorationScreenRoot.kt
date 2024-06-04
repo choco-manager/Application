@@ -8,7 +8,7 @@ import androidx.navigation.NavHostController
 import ru.dadyarri.choco.viewmodels.RestorePasswordViewModel
 
 @Composable
-fun RestorePasswordScreenRoot(navController: NavHostController) {
+fun RequestPasswordRestorationScreenRoot(navController: NavHostController) {
     val viewModel: RestorePasswordViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
 
@@ -18,7 +18,7 @@ fun RestorePasswordScreenRoot(navController: NavHostController) {
         showBottomBar = false,
         canGoBack = navController.previousBackStackEntry != null
     ) {
-        RestorePasswordScreen(state = state, onAction = viewModel::onAction)
+        RequestPasswordRestorationScreen(state = state, onAction = viewModel::onAction)
     }
 
 }

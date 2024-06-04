@@ -37,7 +37,7 @@ class LoginViewModel @Inject constructor(
 
     private fun onForgotPassword() {
         viewModelScope.launch {
-            navigationHandler.navigate(Route.RestorePassword)
+            navigationHandler.navigate(Route.RequestPasswordRestoration)
         }
     }
 
