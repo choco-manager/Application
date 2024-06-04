@@ -15,8 +15,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import ru.dadyarri.choco.navigation.routes.LoginRoute
+import ru.dadyarri.choco.navigation.routes.Route
+import ru.dadyarri.choco.system.navigation.NavigationHandler
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
+import ru.dadyarri.choco.ui.components.Greeting
 import ru.dadyarri.choco.viewmodels.LoginViewModel
 
 @Composable
@@ -36,10 +38,10 @@ fun ChocoApp(
     Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
         NavHost(
             navController = navController,
-            startDestination = LoginRoute,
+            startDestination = Route.Login,
             modifier = Modifier.padding(innerPadding)
         ) {
-            composable<LoginRoute> {
+            composable<Route.Login> {
                 val vm: LoginViewModel = hiltViewModel()
                 val st by vm.state.collectAsState()
 
