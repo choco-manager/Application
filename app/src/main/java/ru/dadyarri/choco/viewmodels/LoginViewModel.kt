@@ -31,7 +31,13 @@ class LoginViewModel @Inject constructor() : ViewModel() {
 
     private fun onForgotPassword() {}
 
-    private fun onTogglePasswordVisibility() {}
+    private fun onTogglePasswordVisibility() {
+        _state.update {
+            it.copy(
+                isPasswordVisible = !it.isPasswordVisible
+            )
+        }
+    }
 
     private fun <T> updateField(action: LoginAction.UpdateField<T>) {
         when (action.field) {
