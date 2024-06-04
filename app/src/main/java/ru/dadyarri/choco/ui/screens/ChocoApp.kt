@@ -30,10 +30,6 @@ fun ChocoApp(
 
     val snackbarHostState = remember { SnackbarHostState() }
 
-    var screenConfig by remember {
-        mutableStateOf(ScreenConfig.default())
-    }
-
     LaunchedEffect(snackbarMessageHandler) {
         snackbarMessageHandler.message.collect { message ->
             snackbarHostState.showSnackbar(message)
@@ -51,24 +47,11 @@ fun ChocoApp(
         startDestination = Route.Login,
     ) {
         composable<Route.Login> {
-            val vm: LoginViewModel = hiltViewModel()
-            val st by vm.state.collectAsState()
-
-            screenConfig = st.screenConfig
-
-            LoginScreen(st, vm::onAction)
+            LoginScreenRoot(navController)
         }
 
         composable<Route.RestorePassword> {
-
-            val vm: RestorePasswordViewModel = hiltViewModel()
-            val st by vm.state.collectAsState()
-
-            screenConfig = st.screenConfig
-
-            BaseScreen {
-                Greeting(name = "Restore password")
-            }
+            RestorePasswordScreenRoot(navController)
         }
     }
 }
