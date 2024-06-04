@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -25,17 +26,20 @@ fun BaseScreen(
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     children: @Composable ColumnScope.() -> Unit
 ) {
-
-    Column(
-        Modifier
-            .animateContentSize(
-                animationSpec = tween(
-                    durationMillis = 500,
-                    easing = FastOutSlowInEasing,
-                    delayMillis = 500
+    Scaffold(
+        modifier = Modifier.fillMaxSize()
+    ) { innerPadding ->
+        Column(
+            Modifier
+                .animateContentSize(
+                    animationSpec = tween(
+                        durationMillis = 500,
+                        easing = FastOutSlowInEasing,
+                        delayMillis = 500
+                    )
                 )
-            )
-    ) {
+                .padding(innerPadding)
+        ) {
 //        if (!LocalInspectionMode.current) {
 //            val viewModel: TopBarViewModel = hiltViewModel()
 //            val networkState by
@@ -55,20 +59,21 @@ fun BaseScreen(
 //                NoInternetAvailable()
 //            }
 //        }
-        Surface(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background)
-                .padding(28.dp)
-        ) {
-            Column(
-                modifier = modifier
+            Surface(
+                modifier = Modifier
                     .fillMaxSize()
-                    .verticalScroll(rememberScrollState()),
-                horizontalAlignment = horizontalAlignment,
-                verticalArrangement = verticalArrangement
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(28.dp)
             ) {
-                children()
+                Column(
+                    modifier = modifier
+                        .fillMaxSize()
+                        .verticalScroll(rememberScrollState()),
+                    horizontalAlignment = horizontalAlignment,
+                    verticalArrangement = verticalArrangement
+                ) {
+                    children()
+                }
             }
         }
     }

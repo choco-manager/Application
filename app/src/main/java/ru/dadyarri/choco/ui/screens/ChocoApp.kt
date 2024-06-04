@@ -1,8 +1,5 @@
 package ru.dadyarri.choco.ui.screens
 
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -11,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -50,33 +46,28 @@ fun ChocoApp(
         }
     }
 
-    Scaffold(
-        modifier = Modifier.fillMaxSize()
-    ) { innerPadding ->
-        NavHost(
-            navController = navController,
-            startDestination = Route.Login,
-            modifier = Modifier.padding(innerPadding)
-        ) {
-            composable<Route.Login> {
-                val vm: LoginViewModel = hiltViewModel()
-                val st by vm.state.collectAsState()
+    NavHost(
+        navController = navController,
+        startDestination = Route.Login,
+    ) {
+        composable<Route.Login> {
+            val vm: LoginViewModel = hiltViewModel()
+            val st by vm.state.collectAsState()
 
-                screenConfig = st.screenConfig
+            screenConfig = st.screenConfig
 
-                LoginScreen(st, vm::onAction)
-            }
+            LoginScreen(st, vm::onAction)
+        }
 
-            composable<Route.RestorePassword> {
+        composable<Route.RestorePassword> {
 
-                val vm: RestorePasswordViewModel = hiltViewModel()
-                val st by vm.state.collectAsState()
+            val vm: RestorePasswordViewModel = hiltViewModel()
+            val st by vm.state.collectAsState()
 
-                screenConfig = st.screenConfig
+            screenConfig = st.screenConfig
 
-                BaseScreen {
-                    Greeting(name = "Restore password")
-                }
+            BaseScreen {
+                Greeting(name = "Restore password")
             }
         }
     }
