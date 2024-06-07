@@ -118,6 +118,14 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore)
 
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.android)
+    implementation(libs.ktor.contentNegotiation)
+    implementation(libs.ktor.serialization)
+    implementation(libs.ktor.serialization.json)
+    implementation(libs.ktor.logging)
+    implementation(libs.logback.classic)
+
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging.ktx)
