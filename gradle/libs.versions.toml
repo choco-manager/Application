@@ -11,6 +11,7 @@ hiltNavigationCompose = "1.2.0"
 firebaseBom = "33.1.0"
 firebaseMessagingKtx = "24.0.0"
 serialization = "1.6.3"
+datastore = "1.1.1"
 
 ksp = "2.0.0-1.0.21"
 googleServices = "4.4.2"
@@ -33,6 +34,7 @@ firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "fir
 firebase-messaging-ktx = { module = "com.google.firebase:firebase-messaging-ktx", version.ref = "firebaseMessagingKtx" }
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended" }
+androidx-datastore = { module = "androidx.datastore:datastore", version.ref = "datastore" }
 
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
