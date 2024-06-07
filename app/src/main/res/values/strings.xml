@@ -9,4 +9,11 @@
     <string name="restore_password">Восстановить</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="orders_screen">Заказы</string>
+    <string name="client_error">Ошибка на клиенте</string>
+    <string name="unknown_error">Неизвестная ошибка</string>
+    <string name="serialization_error">Ошибка разбора данных</string>
+    <string name="server_error">Ошибка на сервере</string>
+    <string name="io_error">Ошибка сети</string>
+    <string name="authorization_error">Ошибка авторизации</string>
+    <string name="not_found">Не найдено: %1$s</string>
 </resources>
