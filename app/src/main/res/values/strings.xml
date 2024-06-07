@@ -16,4 +16,5 @@
     <string name="io_error">Ошибка сети</string>
     <string name="authorization_error">Ошибка авторизации</string>
     <string name="not_found">Не найдено: %1$s</string>
+    <string name="token_prefix">Bearer</string>
 </resources>

@@ -6,6 +6,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import ru.dadyarri.choco.networking.AuthManager
 import ru.dadyarri.choco.storage.DataStoreManager
 import ru.dadyarri.choco.system.navigation.NavigationHandler
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
@@ -25,6 +26,12 @@ object AppModule {
     @Singleton
     fun provideDataStoreManager(@ApplicationContext context: Context): DataStoreManager {
         return DataStoreManager(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideAuthManager(@ApplicationContext context: Context): AuthManager {
+        return AuthManager(context, provideDataStoreManager(context))
     }
 
     @Provides
