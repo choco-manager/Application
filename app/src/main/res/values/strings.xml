@@ -17,4 +17,14 @@
     <string name="authorization_error">Ошибка авторизации</string>
     <string name="not_found">Не найдено: %1$s</string>
     <string name="token_prefix">Bearer </string>
+    <string name="order_title">Заказ от %1$s</string>
+    <string name="price">%1$.2f ₽</string>
+    <string name="order_pending">Принят</string>
+    <string name="order_processing">Обрабатывается</string>
+    <string name="order_shipped">Доставляется</string>
+    <string name="order_delivered">Доставлен</string>
+    <string name="order_cancelled">Отменён</string>
+    <string name="order_onHold">Приостановлен</string>
+    <string name="payment_paid">Оплачено</string>
+    <string name="payment_pending">Не оплачено</string>
 </resources>
