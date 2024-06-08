@@ -1,5 +1,6 @@
 package ru.dadyarri.choco.domain.auth.services
 
+import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -14,15 +15,16 @@ import ru.dadyarri.choco.domain.auth.data.RestorePasswordRequest
 import ru.dadyarri.choco.domain.auth.data.UsernameRequest
 import ru.dadyarri.choco.domain.auth.data.WhoamiResponse
 import ru.dadyarri.choco.networking.AuthManager
-import ru.dadyarri.choco.networking.HttpClientFactory
 import ru.dadyarri.choco.networking.safeRequest
 import javax.inject.Inject
 
-class AuthService @Inject constructor(private val authManager: AuthManager) {
+class AuthService @Inject constructor(
+    private val authManager: AuthManager,
+    private val httpClient: HttpClient,
+) {
 
     suspend fun login(body: LoginRequest): Resource<LoginResponse> {
-        val client = HttpClientFactory.httpClient
-        return client.safeRequest<LoginResponse> {
+        return httpClient.safeRequest<LoginResponse> {
             method = HttpMethod.Post
             url("v3/auth/login")
             setBody(body)
@@ -30,8 +32,7 @@ class AuthService @Inject constructor(private val authManager: AuthManager) {
     }
 
     suspend fun logout(): Resource<EmptyContent> {
-        val client = HttpClientFactory.httpClient
-        return client.safeRequest<EmptyContent> {
+        return httpClient.safeRequest<EmptyContent> {
             method = HttpMethod.Post
             url("v3/auth/logout")
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
@@ -39,7 +40,6 @@ class AuthService @Inject constructor(private val authManager: AuthManager) {
     }
 
     suspend fun whoami(): Resource<WhoamiResponse> {
-        val httpClient = HttpClientFactory.httpClient
         return httpClient.safeRequest {
             method = HttpMethod.Get
             url("v3/auth/whoami")
@@ -48,7 +48,6 @@ class AuthService @Inject constructor(private val authManager: AuthManager) {
     }
 
     suspend fun requestRestoration(body: UsernameRequest): Resource<RestorationTokenResponse> {
-        val httpClient = HttpClientFactory.httpClient
         return httpClient.safeRequest {
             method = HttpMethod.Post
             url("v3/auth/request-restoration")
@@ -57,8 +56,7 @@ class AuthService @Inject constructor(private val authManager: AuthManager) {
     }
 
     suspend fun restorePassword(body: RestorePasswordRequest): Resource<LoginResponse> {
-        val client = HttpClientFactory.httpClient
-        return client.safeRequest<LoginResponse> {
+        return httpClient.safeRequest<LoginResponse> {
             method = HttpMethod.Post
             url("v3/auth/restore")
             setBody(body)

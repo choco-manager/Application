@@ -6,7 +6,9 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import io.ktor.client.HttpClient
 import ru.dadyarri.choco.networking.AuthManager
+import ru.dadyarri.choco.networking.HttpClientFactory
 import ru.dadyarri.choco.storage.DataStoreManager
 import ru.dadyarri.choco.system.navigation.NavigationHandler
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
@@ -31,12 +33,18 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAuthManager(@ApplicationContext context: Context): AuthManager {
-        return AuthManager(context, provideDataStoreManager(context))
+        return AuthManager(context, provideDataStoreManager(context), provideHttpClient())
     }
 
     @Provides
     @Singleton
     fun provideNavigationHandler(): NavigationHandler {
         return NavigationHandler()
+    }
+
+    @Provides
+    @Singleton
+    fun provideHttpClient(): HttpClient {
+        return HttpClientFactory.httpClient
     }
 }

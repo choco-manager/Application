@@ -2,6 +2,7 @@ package ru.dadyarri.choco.networking
 
 import android.content.Context
 import dagger.hilt.android.qualifiers.ApplicationContext
+import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
@@ -20,6 +21,7 @@ import javax.inject.Singleton
 class AuthManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val dataStoreManager: DataStoreManager,
+    private val httpClient: HttpClient,
 ) {
 
     private fun getPrefixedToken(accessToken: String): String {
@@ -32,8 +34,7 @@ class AuthManager @Inject constructor(
     }
 
     private suspend fun accessTokenIsValid(): Boolean {
-        val client = HttpClientFactory.httpClient
-        val response = client.safeRequest<String> {
+        val response = httpClient.safeRequest<String> {
             method = HttpMethod.Get
             url("v3/ping")
             header(HttpHeaders.Authorization, getAuthorizationHeader())
@@ -43,8 +44,7 @@ class AuthManager @Inject constructor(
     }
 
     private suspend fun refreshTokens(): String {
-        val client = HttpClientFactory.httpClient
-        val response = client.safeRequest<LoginResponse> {
+        val response = httpClient.safeRequest<LoginResponse> {
             method = HttpMethod.Get
             url("v3/auth/refresh")
             setBody(RefreshRequest(dataStoreManager.getRefreshToken()))
