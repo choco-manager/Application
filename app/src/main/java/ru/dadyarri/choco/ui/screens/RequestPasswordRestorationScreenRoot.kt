@@ -18,7 +18,9 @@ fun RequestPasswordRestorationScreenRoot(navController: NavHostController) {
         navController = navController,
         showBottomBar = false,
         canGoBack = navController.previousBackStackEntry != null,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        isRefreshing = false,
+        onRefresh = {}
     ) {
         RequestPasswordRestorationScreen(state = state, onAction = viewModel::onAction)
     }

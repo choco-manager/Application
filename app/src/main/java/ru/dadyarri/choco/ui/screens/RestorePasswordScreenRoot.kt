@@ -18,7 +18,9 @@ fun RestorePasswordScreenRoot(navController: NavHostController) {
         title = state.title.asString(),
         navController = navController,
         showBottomBar = false,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        isRefreshing = false,
+        onRefresh = {}
     ) {
         RestorePasswordScreen(state = state, onAction = viewModel::onAction)
     }
