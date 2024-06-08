@@ -12,10 +12,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,10 +26,13 @@ import androidx.navigation.NavHostController
 import ru.dadyarri.choco.ui.components.common.BottomBar
 import ru.dadyarri.choco.ui.components.common.TopBar
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BaseScreen(
     title: String,
     navController: NavHostController,
+    isRefreshing: Boolean,
+    onRefresh: () -> Unit,
     modifier: Modifier = Modifier,
     canGoBack: Boolean = false,
     goBack: () -> Boolean = navController::navigateUp,
@@ -36,7 +41,7 @@ fun BaseScreen(
     fab: @Composable () -> Unit = {},
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    children: @Composable ColumnScope.() -> Unit
+    children: @Composable ColumnScope.() -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -88,20 +93,25 @@ fun BaseScreen(
 //                NoInternetAvailable()
 //            }
 //        }
-            Surface(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(28.dp)
+            PullToRefreshBox(
+                isRefreshing = isRefreshing,
+                onRefresh = onRefresh
             ) {
-                Column(
-                    modifier = modifier
+                Surface(
+                    modifier = Modifier
                         .fillMaxSize()
-                        .verticalScroll(rememberScrollState()),
-                    horizontalAlignment = horizontalAlignment,
-                    verticalArrangement = verticalArrangement
+                        .background(MaterialTheme.colorScheme.background)
+                        .padding(28.dp)
                 ) {
-                    children()
+                    Column(
+                        modifier = modifier
+                            .fillMaxSize()
+                            .verticalScroll(rememberScrollState()),
+                        horizontalAlignment = horizontalAlignment,
+                        verticalArrangement = verticalArrangement
+                    ) {
+                        children()
+                    }
                 }
             }
         }
