@@ -25,7 +25,7 @@ suspend inline fun <reified T> HttpClient.safeRequest(block: HttpRequestBuilder.
         val response = request {
             block()
 
-            if (this.method == HttpMethod.Post) {
+            if (this.method == HttpMethod.Post || this.method == HttpMethod.Patch) {
                 contentType(ContentType.Application.Json)
             }
 
