@@ -10,9 +10,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.client.statement.bodyAsText
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.contentType
 import io.ktor.utils.io.errors.IOException
 import kotlinx.serialization.SerializationException
 import kotlinx.serialization.json.Json
@@ -24,10 +22,6 @@ suspend inline fun <reified T> HttpClient.safeRequest(block: HttpRequestBuilder.
     return try {
         val response = request {
             block()
-
-            if (this.method == HttpMethod.Post || this.method == HttpMethod.Patch) {
-                contentType(ContentType.Application.Json)
-            }
 
             header(HttpHeaders.Accept, ContentType.Application.Json)
         }

@@ -4,8 +4,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
 import ru.dadyarri.choco.common.IdModel
 import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.domain.customers.data.CreateCustomerRequest
@@ -32,6 +34,7 @@ class CustomersService @Inject constructor(
             method = HttpMethod.Post
             url("v3/customers")
             setBody(body)
+            contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
         }
     }

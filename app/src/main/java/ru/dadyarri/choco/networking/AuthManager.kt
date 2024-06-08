@@ -6,8 +6,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
 import ru.dadyarri.choco.R
 import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.common.UiText
@@ -50,8 +52,9 @@ class AuthManager @Inject constructor(
 
     private suspend fun refreshTokens(): String {
         val response = httpClient.safeRequest<LoginResponse> {
-            method = HttpMethod.Get
+            method = HttpMethod.Post
             url("v3/auth/refresh")
+            contentType(ContentType.Application.Json)
             setBody(RefreshRequest(dataStoreManager.getRefreshToken()))
         }
 

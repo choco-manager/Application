@@ -5,8 +5,10 @@ import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.utils.EmptyContent
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
 import ru.dadyarri.choco.common.IdModel
 import ru.dadyarri.choco.common.PagedRequest
 import ru.dadyarri.choco.common.Resource
@@ -49,6 +51,7 @@ class OrdersService @Inject constructor(
             method = HttpMethod.Post
             url("v3/orders")
             setBody(body)
+            contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
         }
     }
@@ -82,6 +85,7 @@ class OrdersService @Inject constructor(
             method = HttpMethod.Patch
             url("v3/orders/${id}/status")
             setBody(body)
+            contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
         }
     }
@@ -91,6 +95,7 @@ class OrdersService @Inject constructor(
             method = HttpMethod.Patch
             url("v3/orders/${id}/payment")
             setBody(body)
+            contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
         }
     }

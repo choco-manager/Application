@@ -5,8 +5,10 @@ import io.ktor.client.request.header
 import io.ktor.client.request.setBody
 import io.ktor.client.request.url
 import io.ktor.client.utils.EmptyContent
+import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
+import io.ktor.http.contentType
 import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.domain.auth.data.LoginRequest
 import ru.dadyarri.choco.domain.auth.data.LoginResponse
@@ -27,6 +29,7 @@ class AuthService @Inject constructor(
         return httpClient.safeRequest<LoginResponse> {
             method = HttpMethod.Post
             url("v3/auth/login")
+            contentType(ContentType.Application.Json)
             setBody(body)
         }
     }
@@ -35,6 +38,7 @@ class AuthService @Inject constructor(
         return httpClient.safeRequest<EmptyContent> {
             method = HttpMethod.Post
             url("v3/auth/logout")
+            contentType(ContentType.Application.Json)
             header(HttpHeaders.Authorization, authManager.getCurrentAuthorizationHeader())
         }
     }
@@ -51,6 +55,7 @@ class AuthService @Inject constructor(
         return httpClient.safeRequest {
             method = HttpMethod.Post
             url("v3/auth/request-restoration")
+            contentType(ContentType.Application.Json)
             setBody(body)
         }
     }
@@ -59,6 +64,7 @@ class AuthService @Inject constructor(
         return httpClient.safeRequest<LoginResponse> {
             method = HttpMethod.Post
             url("v3/auth/restore")
+            contentType(ContentType.Application.Json)
             setBody(body)
         }
     }
