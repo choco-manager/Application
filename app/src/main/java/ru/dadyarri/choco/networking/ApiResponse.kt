@@ -1,6 +1,7 @@
 package ru.dadyarri.choco.networking
 
 import kotlinx.serialization.Serializable
+import ru.dadyarri.choco.common.PagedInfo
 
 @Serializable
 data class ApiResponse<T>(
@@ -11,4 +12,5 @@ data class ApiResponse<T>(
     val correlationId: String = "",
     val errors: List<String> = emptyList(),
     val validationErrors: List<ValidationError> = emptyList(),
+    val pagedInfo: PagedInfo? = null,
 )
