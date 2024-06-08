@@ -19,7 +19,7 @@ class CustomersService @Inject constructor(
     private val httpClient: HttpClient,
 ) {
 
-    suspend fun getAllCCustomers(): Resource<ListOfCustomers> {
+    suspend fun getAllCustomers(): Resource<ListOfCustomers> {
         return httpClient.safeRequest {
             method = HttpMethod.Get
             url("v3/customers")
