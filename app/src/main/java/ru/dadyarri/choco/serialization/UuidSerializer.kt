@@ -1,4 +1,4 @@
-package ru.dadyarri.choco.networking
+package ru.dadyarri.choco.serialization
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind
