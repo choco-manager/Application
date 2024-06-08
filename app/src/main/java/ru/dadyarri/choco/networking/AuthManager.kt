@@ -13,7 +13,10 @@ import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.common.UiText
 import ru.dadyarri.choco.domain.auth.data.LoginResponse
 import ru.dadyarri.choco.domain.auth.data.RefreshRequest
+import ru.dadyarri.choco.navigation.routes.Route
 import ru.dadyarri.choco.storage.DataStoreManager
+import ru.dadyarri.choco.system.navigation.NavigationHandler
+import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -22,6 +25,8 @@ class AuthManager @Inject constructor(
     @ApplicationContext private val context: Context,
     private val dataStoreManager: DataStoreManager,
     private val httpClient: HttpClient,
+    private val navigationHandler: NavigationHandler,
+    private val snackbarMessageHandler: SnackbarMessageHandler,
 ) {
 
     private fun getPrefixedToken(accessToken: String): String {
@@ -50,13 +55,22 @@ class AuthManager @Inject constructor(
             setBody(RefreshRequest(dataStoreManager.getRefreshToken()))
         }
 
+        return when (response) {
+            is Resource.Success -> {
+                dataStoreManager.updateRefreshToken(refreshToken = response.data!!.refreshToken)
+                dataStoreManager.updateAccessToken(accessToken = response.data.accessToken)
+                response.data.accessToken
+            }
 
-        return if (response is Resource.Success) {
-            dataStoreManager.updateRefreshToken(refreshToken = response.data!!.refreshToken)
-            dataStoreManager.updateAccessToken(accessToken = response.data.accessToken)
-            response.data.accessToken
-        } else {
-            ""
+            is Resource.Forbidden -> {
+                snackbarMessageHandler.postMessage(response.message!!)
+                navigationHandler.navigate(Route.Login)
+                ""
+            }
+
+            else -> {
+                ""
+            }
         }
     }
 
