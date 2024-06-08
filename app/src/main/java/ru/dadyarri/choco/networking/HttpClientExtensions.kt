@@ -41,6 +41,8 @@ suspend inline fun <reified T> HttpClient.safeRequest(block: HttpRequestBuilder.
                 response.parseBody<T>().value!!
             )
 
+            HttpStatusCode.NoContent -> Resource.SuccessNoData()
+
             HttpStatusCode.Unauthorized -> Resource.Error(
                 UiText.StringResource(R.string.authorization_error)
             )
