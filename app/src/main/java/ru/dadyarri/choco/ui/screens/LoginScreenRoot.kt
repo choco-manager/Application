@@ -6,11 +6,12 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import ru.dadyarri.choco.ui.actions.LoginAction
 import ru.dadyarri.choco.viewmodels.LoginViewModel
 
 @Composable
 fun LoginScreenRoot(
-    navController: NavHostController
+    navController: NavHostController,
 ) {
 
     val viewModel: LoginViewModel = hiltViewModel()
@@ -20,7 +21,9 @@ fun LoginScreenRoot(
         title = state.title.asString(),
         navController = navController,
         showBottomBar = false,
-        verticalArrangement = Arrangement.Center
+        verticalArrangement = Arrangement.Center,
+        isRefreshing = state.isRefreshing,
+        onRefresh = { viewModel.onAction(LoginAction.Refresh) }
     ) {
         LoginScreen(state, viewModel::onAction)
     }

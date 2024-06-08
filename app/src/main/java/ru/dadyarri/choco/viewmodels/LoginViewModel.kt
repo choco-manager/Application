@@ -3,6 +3,7 @@ package ru.dadyarri.choco.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -16,7 +17,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val navigationHandler: NavigationHandler
+    private val navigationHandler: NavigationHandler,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(LoginState())
@@ -26,6 +27,7 @@ class LoginViewModel @Inject constructor(
     fun onAction(action: LoginAction) {
         when (action) {
             is LoginAction.Login -> onLogin()
+            is LoginAction.Refresh -> onRefresh()
             is LoginAction.ForgotPassword -> onForgotPassword()
             is LoginAction.TogglePasswordVisibility -> onTogglePasswordVisibility()
             is LoginAction.UpdateField<*> -> onUpdateField(action)
@@ -33,7 +35,23 @@ class LoginViewModel @Inject constructor(
     }
 
 
-    private fun onLogin() {}
+    private fun onLogin() {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    isRefreshing = true
+                )
+            }
+
+            delay(3000)
+
+            _state.update {
+                it.copy(
+                    isRefreshing = false
+                )
+            }
+        }
+    }
 
     private fun onForgotPassword() {
         viewModelScope.launch {
@@ -65,6 +83,24 @@ class LoginViewModel @Inject constructor(
                         password = action.newValue as String
                     )
                 }
+            }
+        }
+    }
+
+    private fun onRefresh() {
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    isRefreshing = true
+                )
+            }
+
+            delay(500)
+
+            _state.update {
+                it.copy(
+                    isRefreshing = false
+                )
             }
         }
     }
