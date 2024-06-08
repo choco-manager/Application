@@ -17,11 +17,16 @@ class OrdersViewModel @Inject constructor() : ViewModel() {
 
     fun onAction(action: OrdersAction) {
         when (action) {
+            is OrdersAction.Refresh -> onRefresh()
             is OrdersAction.OpenOrder -> onOpenOrder(action.id)
         }
     }
 
     private fun onOpenOrder(id: UUID) {
+
+    }
+
+    private fun onRefresh() {
 
     }
 
