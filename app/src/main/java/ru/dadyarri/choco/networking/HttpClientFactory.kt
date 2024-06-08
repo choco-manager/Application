@@ -9,7 +9,7 @@ import io.ktor.client.plugins.logging.Logging
 import io.ktor.serialization.kotlinx.json.json
 
 object HttpClientFactory {
-    const val baseUrl = ""
+    private const val BASE_URL = "choco.dadyarri.ru"
     val httpClient: HttpClient by lazy {
         HttpClient(Android) {
             install(Logging) {
@@ -21,7 +21,7 @@ object HttpClientFactory {
             }
 
             install(DefaultRequest) {
-                url(scheme = "https", host = baseUrl)
+                url(scheme = "https", host = BASE_URL)
             }
         }
     }
