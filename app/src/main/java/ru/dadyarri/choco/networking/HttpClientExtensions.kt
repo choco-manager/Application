@@ -47,8 +47,12 @@ suspend inline fun <reified T> HttpClient.safeRequest(block: HttpRequestBuilder.
                 response.parseBody<T>().validationErrors
             )
 
-            HttpStatusCode.Unauthorized -> Resource.Error(
+            HttpStatusCode.Unauthorized -> Resource.Unauthorized(
                 UiText.StringResource(R.string.authorization_error)
+            )
+
+            HttpStatusCode.Forbidden -> Resource.Forbidden(
+                UiText.StringResource(R.string.forbidden_error)
             )
 
             HttpStatusCode.NotFound -> Resource.Error(

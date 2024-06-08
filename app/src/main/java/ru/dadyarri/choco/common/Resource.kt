@@ -10,6 +10,8 @@ sealed class Resource<T>(
     class Success<T>(data: T) : Resource<T>(data)
     class SuccessNoData<T> : Resource<T>()
     class Error<T>(message: UiText, data: T? = null) : Resource<T>(data, message)
+    class Forbidden<T>(message: UiText) : Resource<T>(null, message)
+    class Unauthorized<T>(message: UiText) : Resource<T>(null, message)
     class BadRequest<T>(validationErrors: List<ValidationError>) :
         Resource<T>(validationErrors = validationErrors)
 
