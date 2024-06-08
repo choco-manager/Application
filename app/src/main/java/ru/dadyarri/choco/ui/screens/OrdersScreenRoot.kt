@@ -1,6 +1,10 @@
 package ru.dadyarri.choco.ui.screens
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -23,7 +27,12 @@ fun OrdersScreenRoot(
         title = state.title.asString(),
         navController = navController,
         isRefreshing = state.data is Resource.Loading,
-        onRefresh = { viewModel.onAction(OrdersAction.Refresh) }
+        onRefresh = { viewModel.onAction(OrdersAction.Refresh) },
+        fab = {
+            IconButton(onClick = { viewModel.onAction(OrdersAction.Create) }) {
+                Icon(imageVector = Icons.Outlined.Add, contentDescription = null)
+            }
+        }
     ) {
         PullToRefreshBox(
             isRefreshing = state.data is Resource.Loading,
