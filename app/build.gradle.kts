@@ -18,7 +18,7 @@ android {
         applicationId = "ru.dadyarri.choco"
         minSdk = 29
         targetSdk = 34
-        versionName = "3.3.0"
+        versionName = "3.4.0"
 
         vectorDrawables {
             useSupportLibrary = true
