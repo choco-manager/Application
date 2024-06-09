@@ -118,6 +118,8 @@ dependencies {
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.androidx.datastore)
 
+    implementation(libs.androidx.core.splashscreen)
+
     implementation(libs.ktor.core)
     implementation(libs.ktor.android)
     implementation(libs.ktor.contentNegotiation)
