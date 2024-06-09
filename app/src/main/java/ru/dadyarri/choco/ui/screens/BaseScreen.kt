@@ -14,6 +14,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
@@ -21,6 +23,7 @@ import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import ru.dadyarri.choco.ui.components.common.BottomBar
@@ -38,7 +41,8 @@ fun BaseScreen(
     goBack: () -> Boolean = navController::navigateUp,
     showBottomBar: Boolean = true,
     actions: @Composable RowScope.() -> Unit = {},
-    fab: @Composable () -> Unit = {},
+    fabIcon: ImageVector? = null,
+    fabAction: () -> Unit = {},
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     children: @Composable ColumnScope.() -> Unit,
@@ -58,7 +62,13 @@ fun BaseScreen(
             }
         },
         floatingActionButton = {
-            fab()
+            if (fabIcon != null) {
+                FloatingActionButton(
+                    onClick = fabAction
+                ) {
+                    Icon(imageVector = fabIcon, contentDescription = null)
+                }
+            }
         },
         floatingActionButtonPosition = FabPosition.End,
         modifier = Modifier.fillMaxSize()
