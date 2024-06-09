@@ -33,7 +33,13 @@ object AppModule {
     @Provides
     @Singleton
     fun provideAuthManager(@ApplicationContext context: Context): AuthManager {
-        return AuthManager(context, provideDataStoreManager(context), provideHttpClient())
+        return AuthManager(
+            context,
+            provideDataStoreManager(context),
+            provideHttpClient(),
+            provideNavigationHandler(),
+            provideSnackbarMessageHandler(context)
+        )
     }
 
     @Provides
