@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.ChocoManager.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">#FFF8E8</item>
+        <item name="postSplashScreenTheme">@style/Theme.ChocoManager</item>
+        <item name="android:windowSplashScreenAnimatedIcon">@drawable/animated_logo</item>
+    </style>
+</resources>
