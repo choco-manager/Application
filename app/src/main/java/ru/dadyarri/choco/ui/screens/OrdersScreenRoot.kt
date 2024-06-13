@@ -2,8 +2,6 @@ package ru.dadyarri.choco.ui.screens
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -13,7 +11,6 @@ import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.ui.actions.OrdersAction
 import ru.dadyarri.choco.viewmodels.OrdersViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OrdersScreenRoot(
     navController: NavHostController,
@@ -29,11 +26,6 @@ fun OrdersScreenRoot(
         fabIcon = Icons.Outlined.Add,
         fabAction = { viewModel.onAction(OrdersAction.Create) }
     ) {
-        PullToRefreshBox(
-            isRefreshing = state.data is Resource.Loading,
-            onRefresh = { viewModel.onAction(OrdersAction.Refresh) }
-        ) {
-            OrdersScreen(state = state, onAction = viewModel::onAction)
-        }
+        OrdersScreen(state = state, onAction = viewModel::onAction)
     }
 }
