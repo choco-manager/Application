@@ -27,7 +27,7 @@ class OrdersService @Inject constructor(
     private val httpClient: HttpClient,
 ) {
 
-    suspend fun getAllOrders(paged: PagedRequest): Resource<ListOfOrders> {
+    suspend fun getAllOrders(paged: PagedRequest = PagedRequest()): Resource<ListOfOrders> {
         return httpClient.safeRequest {
             method = HttpMethod.Get
             url(path = "v3/orders") {
