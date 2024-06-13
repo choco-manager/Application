@@ -3,7 +3,6 @@ package ru.dadyarri.choco.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -37,8 +36,6 @@ class SplashScreenViewModel @Inject constructor(
                 is Resource.Success -> Route.Orders
                 else -> Route.Login
             }
-
-            delay(5000)
 
             navigationHandler.navigate(route)
 
