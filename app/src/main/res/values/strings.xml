@@ -16,7 +16,7 @@
     <string name="io_error">Ошибка сети</string>
     <string name="authorization_error">Ошибка авторизации</string>
     <string name="not_found">Не найдено: %1$s</string>
-    <string name="token_prefix">Bearer </string>
+    <string name="token_prefix">Bearer %1$s</string>
     <string name="order_title">Заказ от %1$s</string>
     <string name="price">%1$.2f ₽</string>
     <string name="order_pending">Принят</string>
