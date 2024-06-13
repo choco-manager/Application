@@ -132,6 +132,9 @@ dependencies {
     implementation(libs.firebase.analytics)
     implementation(libs.firebase.messaging.ktx)
 
+    runtimeOnly(libs.kotlinx.coroutines.play.services)
+
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
