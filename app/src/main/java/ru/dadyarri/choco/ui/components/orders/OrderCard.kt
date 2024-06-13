@@ -1,13 +1,9 @@
 package ru.dadyarri.choco.ui.components.orders
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Cancel
 import androidx.compose.material.icons.outlined.Check
@@ -20,11 +16,9 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -73,9 +67,6 @@ fun OrderCard(order: OrderDto, onClick: (UUID) -> Unit) {
             Text(text = stringResource(R.string.price, order.totalAmount))
         },
         modifier = Modifier
-            .padding(3.dp)
-            .clip(RoundedCornerShape(20.dp))
-            .border(BorderStroke(1.dp, MaterialTheme.colorScheme.outline))
             .clickable {
                 onClick(order.id)
             }
