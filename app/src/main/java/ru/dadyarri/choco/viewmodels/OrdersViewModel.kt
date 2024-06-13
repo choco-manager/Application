@@ -8,6 +8,8 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import ru.dadyarri.choco.common.Resource
+import ru.dadyarri.choco.domain.orders.data.OrderStatus
+import ru.dadyarri.choco.domain.orders.data.PaymentStatus
 import ru.dadyarri.choco.domain.orders.services.OrdersService
 import ru.dadyarri.choco.navigation.routes.Route
 import ru.dadyarri.choco.system.navigation.NavigationHandler
@@ -34,6 +36,11 @@ class OrdersViewModel @Inject constructor(
             is OrdersAction.Refresh -> onRefresh()
             is OrdersAction.OpenOrder -> onOpenOrder(action.id)
             is OrdersAction.Create -> onCreate()
+            is OrdersAction.ChangeOrderStatus -> onChangeOrderStatus(action.id, action.orderStatus)
+            is OrdersAction.ChangePaymentStatus -> onChangePaymentStatus(
+                action.id,
+                action.paymentStatus
+            )
         }
     }
 
@@ -61,6 +68,14 @@ class OrdersViewModel @Inject constructor(
         viewModelScope.launch {
             navigationHandler.navigate(Route.CreateOrder)
         }
+    }
+
+    private fun onChangeOrderStatus(id: UUID, orderStatus: OrderStatus) {
+
+    }
+
+    private fun onChangePaymentStatus(id: UUID, paymentStatus: PaymentStatus) {
+
     }
 
 }

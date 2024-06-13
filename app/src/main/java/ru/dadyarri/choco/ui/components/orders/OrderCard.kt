@@ -14,10 +14,16 @@ import androidx.compose.material.icons.outlined.PendingActions
 import androidx.compose.material.icons.outlined.Schema
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -30,7 +36,16 @@ import ru.dadyarri.choco.util.format
 import java.util.UUID
 
 @Composable
-fun OrderCard(order: OrderDto, onClick: (UUID) -> Unit) {
+fun OrderCard(
+    order: OrderDto,
+    onClick: (UUID) -> Unit,
+    onSelectOrderStatus: (UUID, OrderStatus) -> Unit,
+    onSelectPaymentStatus: (UUID, PaymentStatus) -> Unit,
+) {
+
+    var orderStatusMenuStatus by remember { mutableStateOf(false) }
+    var paymentStatusMenuStatus by remember { mutableStateOf(false) }
+
     ListItem(
         headlineContent = {
             Text(stringResource(R.string.order_title, order.orderedAt.format()))
@@ -40,7 +55,9 @@ fun OrderCard(order: OrderDto, onClick: (UUID) -> Unit) {
                 verticalArrangement = Arrangement.spacedBy(6.dp),
             ) {
                 AssistChip(
-                    onClick = { },
+                    onClick = {
+                        orderStatusMenuStatus = true
+                    },
                     label = { Text(getOrderStatusLabel(order.orderStatus)) },
                     leadingIcon = {
                         Icon(
@@ -51,7 +68,9 @@ fun OrderCard(order: OrderDto, onClick: (UUID) -> Unit) {
                     }
                 )
                 AssistChip(
-                    onClick = { },
+                    onClick = {
+                        paymentStatusMenuStatus = true
+                    },
                     label = { Text(getPaymentStatusLabel(order.paymentStatus)) },
                     leadingIcon = {
                         Icon(
@@ -71,6 +90,34 @@ fun OrderCard(order: OrderDto, onClick: (UUID) -> Unit) {
                 onClick(order.id)
             }
     )
+
+    DropdownMenu(
+        expanded = orderStatusMenuStatus,
+        onDismissRequest = { orderStatusMenuStatus = false }) {
+        OrderStatus.entries.forEach {
+            DropdownMenuItem(
+                text = {
+                    Text(text = getOrderStatusLabel(orderStatus = it))
+                },
+                onClick = { onSelectOrderStatus(order.id, it) },
+                leadingIcon = { Icon(getOrderStatusIcon(orderStatus = it), null) }
+            )
+        }
+    }
+
+    DropdownMenu(
+        expanded = paymentStatusMenuStatus,
+        onDismissRequest = { paymentStatusMenuStatus = false }) {
+        PaymentStatus.entries.forEach {
+            DropdownMenuItem(
+                text = {
+                    Text(text = getPaymentStatusLabel(paymentStatus = it))
+                },
+                onClick = { onSelectPaymentStatus(order.id, it) },
+                leadingIcon = { Icon(getPaymentStatusIcon(paymentStatus = it), null) }
+            )
+        }
+    }
 }
 
 @Composable

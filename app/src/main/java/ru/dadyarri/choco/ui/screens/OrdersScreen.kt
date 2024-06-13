@@ -22,9 +22,25 @@ fun OrdersScreen(state: OrdersState, onAction: (OrdersAction) -> Unit) {
 
         LazyColumn {
             items(state.data.data.orders, itemContent = {
-                OrderCard(order = it) { id ->
-                    onAction(OrdersAction.OpenOrder(id))
-                }
+                OrderCard(
+                    order = it,
+                    onClick = { id ->
+                        onAction(OrdersAction.OpenOrder(id))
+                    },
+                    onSelectPaymentStatus = { id, paymentStatus ->
+                        onAction(
+                            OrdersAction.ChangePaymentStatus(
+                                id,
+                                paymentStatus
+                            )
+                        )
+                    },
+                    onSelectOrderStatus = { id, orderStatus ->
+                        onAction(
+                            OrdersAction.ChangeOrderStatus(id, orderStatus)
+                        )
+                    }
+                )
             })
         }
 
