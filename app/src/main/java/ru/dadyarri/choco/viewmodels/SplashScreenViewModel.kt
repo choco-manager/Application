@@ -8,6 +8,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.domain.auth.services.AuthService
 import ru.dadyarri.choco.navigation.routes.Route
 import ru.dadyarri.choco.system.navigation.NavigationHandler
@@ -30,18 +31,10 @@ class SplashScreenViewModel @Inject constructor(
                 it.copy(isVisible = true)
             }
 
-//            val whoamiResponse = authService.whoami()
-//
-//            val route = when (whoamiResponse) {
-//                is Resource.Success -> Route.Orders
-//                else -> Route.Login
-//            }
-//
-
-            val whoamiResponse = false
+            val whoamiResponse = authService.whoami()
 
             val route = when (whoamiResponse) {
-                true -> Route.Orders
+                is Resource.Success -> Route.Orders
                 else -> Route.Login
             }
 
