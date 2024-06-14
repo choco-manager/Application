@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.domain.orders.data.OrderStatus
 import ru.dadyarri.choco.domain.orders.data.PaymentStatus
+import ru.dadyarri.choco.domain.orders.data.UpdateOrderStatusRequest
+import ru.dadyarri.choco.domain.orders.data.UpdatePaymentStatusRequest
 import ru.dadyarri.choco.domain.orders.services.OrdersService
 import ru.dadyarri.choco.navigation.routes.Route
 import ru.dadyarri.choco.system.navigation.NavigationHandler
@@ -71,11 +73,25 @@ class OrdersViewModel @Inject constructor(
     }
 
     private fun onChangeOrderStatus(id: UUID, orderStatus: OrderStatus) {
+        viewModelScope.launch {
+            val response =
+                ordersService.updateOrderStatus(id, UpdateOrderStatusRequest(orderStatus))
 
+            if (response is Resource.Success) {
+                onRefresh()
+            }
+        }
     }
 
     private fun onChangePaymentStatus(id: UUID, paymentStatus: PaymentStatus) {
+        viewModelScope.launch {
+            val response =
+                ordersService.updatePaymentStatus(id, UpdatePaymentStatusRequest(paymentStatus))
 
+            if (response is Resource.Success) {
+                onRefresh()
+            }
+        }
     }
 
 }
