@@ -1,6 +1,7 @@
 package ru.dadyarri.choco.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -18,43 +19,49 @@ import ru.dadyarri.choco.ui.state.RequestPasswordRestorationState
 @Composable
 fun RequestPasswordRestorationScreen(
     state: RequestPasswordRestorationState,
-    onAction: (RequestPasswordRestorationAction) -> Unit
+    onAction: (RequestPasswordRestorationAction) -> Unit,
 ) {
-    OutlinedTextField(
-        value = state.login,
-        onValueChange = {
-            onAction(
-                RequestPasswordRestorationAction.UpdateField(
-                    RequestPasswordRestorationFormField.Login,
-                    it
-                )
+    LazyColumn {
+        item {
+            OutlinedTextField(
+                value = state.login,
+                onValueChange = {
+                    onAction(
+                        RequestPasswordRestorationAction.UpdateField(
+                            RequestPasswordRestorationFormField.Login,
+                            it
+                        )
+                    )
+                },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(
+                    autoCorrectEnabled = false,
+                    keyboardType = KeyboardType.Ascii,
+                    imeAction = ImeAction.Next
+                ),
+                enabled = state.isFormEnabled,
+                isError = !state.loginError?.asString().isNullOrBlank(),
+                supportingText = {
+                    if (!state.loginError?.asString().isNullOrBlank()) {
+                        Text(text = state.loginError?.asString()!!)
+                    }
+                },
+                label = {
+                    Text(text = stringResource(R.string.login))
+                }
             )
-        },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            autoCorrectEnabled = false,
-            keyboardType = KeyboardType.Ascii,
-            imeAction = ImeAction.Next
-        ),
-        enabled = state.isFormEnabled,
-        isError = !state.loginError?.asString().isNullOrBlank(),
-        supportingText = {
-            if (!state.loginError?.asString().isNullOrBlank()) {
-                Text(text = state.loginError?.asString()!!)
-            }
-        },
-        label = {
-            Text(text = stringResource(R.string.login))
         }
-    )
 
-    Button(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = {
-            onAction(RequestPasswordRestorationAction.RequestRestoration)
-        },
-        enabled = state.isFormEnabled
-    ) {
-        Text(text = stringResource(R.string.restore_password))
+        item {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onAction(RequestPasswordRestorationAction.RequestRestoration)
+                },
+                enabled = state.isFormEnabled
+            ) {
+                Text(text = stringResource(R.string.restore_password))
+            }
+        }
     }
 }

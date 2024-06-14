@@ -1,6 +1,7 @@
 package ru.dadyarri.choco.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -27,81 +28,91 @@ import ru.dadyarri.choco.ui.state.LoginState
 @Composable
 fun LoginScreen(
     state: LoginState,
-    onAction: (LoginAction) -> Unit
+    onAction: (LoginAction) -> Unit,
 ) {
-    OutlinedTextField(
-        value = state.login,
-        onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Login, it)) },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            autoCorrectEnabled = false,
-            keyboardType = KeyboardType.Ascii,
-            imeAction = ImeAction.Next
-        ),
-        enabled = state.isFormEnabled,
-        isError = !state.loginError?.asString().isNullOrBlank(),
-        supportingText = {
-            if (!state.loginError?.asString().isNullOrBlank()) {
-                Text(text = state.loginError?.asString()!!)
-            }
-        },
-        label = {
-            Text(text = stringResource(R.string.login))
+    LazyColumn {
+        item {
+            OutlinedTextField(
+                value = state.login,
+                onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Login, it)) },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(
+                    autoCorrectEnabled = false,
+                    keyboardType = KeyboardType.Ascii,
+                    imeAction = ImeAction.Next
+                ),
+                enabled = state.isFormEnabled,
+                isError = !state.loginError?.asString().isNullOrBlank(),
+                supportingText = {
+                    if (!state.loginError?.asString().isNullOrBlank()) {
+                        Text(text = state.loginError?.asString()!!)
+                    }
+                },
+                label = {
+                    Text(text = stringResource(R.string.login))
+                }
+            )
         }
-    )
 
-    OutlinedTextField(
-        value = state.password,
-        onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Password, it)) },
-        modifier = Modifier.fillMaxWidth(),
-        keyboardOptions = KeyboardOptions(
-            autoCorrectEnabled = false,
-            keyboardType = KeyboardType.Password,
-            imeAction = ImeAction.Done,
-        ),
-        visualTransformation = if (state.isPasswordVisible) {
-            VisualTransformation.None
-        } else {
-            PasswordVisualTransformation()
-        },
-        keyboardActions = KeyboardActions(
-            onDone = {
-                onAction(LoginAction.Login)
-            }
-        ),
-        enabled = state.isFormEnabled,
-        isError = !state.passwordError?.asString().isNullOrBlank(),
-        supportingText = {
-            if (!state.passwordError?.asString().isNullOrBlank()) {
-                Text(text = state.passwordError?.asString()!!)
-            }
-        },
-        label = {
-            Text(text = stringResource(R.string.password))
-        },
-        trailingIcon = {
-            val image = if (state.isPasswordVisible)
-                Icons.Outlined.Visibility
-            else Icons.Outlined.VisibilityOff
+        item {
+            OutlinedTextField(
+                value = state.password,
+                onValueChange = { onAction(LoginAction.UpdateField(LoginFormField.Password, it)) },
+                modifier = Modifier.fillMaxWidth(),
+                keyboardOptions = KeyboardOptions(
+                    autoCorrectEnabled = false,
+                    keyboardType = KeyboardType.Password,
+                    imeAction = ImeAction.Done,
+                ),
+                visualTransformation = if (state.isPasswordVisible) {
+                    VisualTransformation.None
+                } else {
+                    PasswordVisualTransformation()
+                },
+                keyboardActions = KeyboardActions(
+                    onDone = {
+                        onAction(LoginAction.Login)
+                    }
+                ),
+                enabled = state.isFormEnabled,
+                isError = !state.passwordError?.asString().isNullOrBlank(),
+                supportingText = {
+                    if (!state.passwordError?.asString().isNullOrBlank()) {
+                        Text(text = state.passwordError?.asString()!!)
+                    }
+                },
+                label = {
+                    Text(text = stringResource(R.string.password))
+                },
+                trailingIcon = {
+                    val image = if (state.isPasswordVisible)
+                        Icons.Outlined.Visibility
+                    else Icons.Outlined.VisibilityOff
 
-            IconButton(onClick = { onAction(LoginAction.TogglePasswordVisibility) }) {
-                Icon(imageVector = image, null)
+                    IconButton(onClick = { onAction(LoginAction.TogglePasswordVisibility) }) {
+                        Icon(imageVector = image, null)
+                    }
+                }
+            )
+        }
+
+        item {
+            TextButton(onClick = { onAction(LoginAction.ForgotPassword) }) {
+                Text(text = stringResource(R.string.forgot_password))
             }
         }
-    )
 
-    TextButton(onClick = { onAction(LoginAction.ForgotPassword) }) {
-        Text(text = stringResource(R.string.forgot_password))
-    }
-
-    Button(
-        modifier = Modifier.fillMaxWidth(),
-        onClick = {
-            onAction(LoginAction.Login)
-        },
-        enabled = state.isFormEnabled
-    ) {
-        Text(text = stringResource(R.string.log_in))
+        item {
+            Button(
+                modifier = Modifier.fillMaxWidth(),
+                onClick = {
+                    onAction(LoginAction.Login)
+                },
+                enabled = state.isFormEnabled
+            ) {
+                Text(text = stringResource(R.string.log_in))
+            }
+        }
     }
 
 

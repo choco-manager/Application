@@ -4,9 +4,7 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -19,7 +17,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
@@ -34,16 +31,13 @@ fun BaseScreen(
     navController: NavHostController,
     isRefreshing: Boolean,
     onRefresh: () -> Unit,
-    modifier: Modifier = Modifier,
     canGoBack: Boolean = false,
     goBack: () -> Boolean = navController::navigateUp,
     showBottomBar: Boolean = true,
     actions: @Composable RowScope.() -> Unit = {},
     fabIcon: ImageVector? = null,
     fabAction: () -> Unit = {},
-    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
-    horizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    children: @Composable ColumnScope.() -> Unit,
+    children: @Composable () -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -111,14 +105,7 @@ fun BaseScreen(
                         .background(MaterialTheme.colorScheme.background)
                         .padding(28.dp)
                 ) {
-                    Column(
-                        modifier = modifier
-                            .fillMaxSize(),
-                        horizontalAlignment = horizontalAlignment,
-                        verticalArrangement = verticalArrangement
-                    ) {
-                        children()
-                    }
+                    children()
                 }
             }
         }
