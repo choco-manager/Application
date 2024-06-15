@@ -15,5 +15,5 @@ sealed class Resource<T>(
     class BadRequest<T>(validationErrors: List<ValidationError>) :
         Resource<T>(validationErrors = validationErrors)
 
-    class Loading<T> : Resource<T>()
+    class Loading<T>(data: T?) : Resource<T>(data)
 }

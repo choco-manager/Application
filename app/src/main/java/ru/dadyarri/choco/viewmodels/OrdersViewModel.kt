@@ -74,6 +74,10 @@ class OrdersViewModel @Inject constructor(
 
     private fun onChangeOrderStatus(id: UUID, orderStatus: OrderStatus) {
         viewModelScope.launch {
+            _state.update {
+                it.copy(data = Resource.Loading(it.data.data))
+            }
+
             val response =
                 ordersService.updateOrderStatus(id, UpdateOrderStatusRequest(orderStatus))
 
@@ -85,6 +89,10 @@ class OrdersViewModel @Inject constructor(
 
     private fun onChangePaymentStatus(id: UUID, paymentStatus: PaymentStatus) {
         viewModelScope.launch {
+            _state.update {
+                it.copy(data = Resource.Loading(it.data.data))
+            }
+
             val response =
                 ordersService.updatePaymentStatus(id, UpdatePaymentStatusRequest(paymentStatus))
 
