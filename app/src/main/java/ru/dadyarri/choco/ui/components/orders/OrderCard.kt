@@ -119,7 +119,10 @@ fun OrderCard(
                 text = {
                     Text(text = getOrderStatusLabel(orderStatus = it))
                 },
-                onClick = { onSelectOrderStatus(order.id, it) },
+                onClick = {
+                    onSelectOrderStatus(order.id, it)
+                    orderStatusMenuStatus = false
+                },
                 leadingIcon = { Icon(getOrderStatusIcon(orderStatus = it), null) }
             )
         }
@@ -133,7 +136,10 @@ fun OrderCard(
                 text = {
                     Text(text = getPaymentStatusLabel(paymentStatus = it))
                 },
-                onClick = { onSelectPaymentStatus(order.id, it) },
+                onClick = {
+                    onSelectPaymentStatus(order.id, it)
+                    paymentStatusMenuStatus = false
+                },
                 leadingIcon = { Icon(getPaymentStatusIcon(paymentStatus = it), null) }
             )
         }
