@@ -30,4 +30,7 @@
     <string name="forbidden_error">Ваша сессия истекла. Пожалуйста, войдите снова, чтобы продолжить.</string>
     <string name="no_internet_connection">Нет подключения к интернету</string>
     <string name="deliver_in">Доставить %1$s</string>
+    <string name="order">Заказ</string>
+    <string name="procurements_screen">Поставки</string>
+    <string name="menu_screen">Меню</string>
 </resources>
