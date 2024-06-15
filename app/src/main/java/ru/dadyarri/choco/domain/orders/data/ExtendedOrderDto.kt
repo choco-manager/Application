@@ -7,9 +7,10 @@ import java.time.LocalDateTime
 import java.util.UUID
 
 @Serializable
-data class OrderDto(
+data class ExtendedOrderDto(
     @Serializable(UuidSerializer::class)
     val id: UUID,
+    val products: List<OrderedProductDto>,
     @Serializable(LocalDateTimeSerializer::class)
     val orderedAt: LocalDateTime,
     @Serializable(LocalDateTimeSerializer::class)

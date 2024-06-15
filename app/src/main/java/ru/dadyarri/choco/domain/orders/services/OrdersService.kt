@@ -13,8 +13,8 @@ import ru.dadyarri.choco.common.IdModel
 import ru.dadyarri.choco.common.PagedRequest
 import ru.dadyarri.choco.common.Resource
 import ru.dadyarri.choco.domain.orders.data.CreateOrderRequest
+import ru.dadyarri.choco.domain.orders.data.ExtendedOrderDto
 import ru.dadyarri.choco.domain.orders.data.ListOfOrders
-import ru.dadyarri.choco.domain.orders.data.OrderDto
 import ru.dadyarri.choco.domain.orders.data.UpdateOrderStatusRequest
 import ru.dadyarri.choco.domain.orders.data.UpdatePaymentStatusRequest
 import ru.dadyarri.choco.networking.AuthManager
@@ -38,7 +38,7 @@ class OrdersService @Inject constructor(
         }
     }
 
-    suspend fun getOrder(id: UUID): Resource<OrderDto> {
+    suspend fun getOrder(id: UUID): Resource<ExtendedOrderDto> {
         return httpClient.safeRequest {
             method = HttpMethod.Get
             url("v3/orders/${id}")

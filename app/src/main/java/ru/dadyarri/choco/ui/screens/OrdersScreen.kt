@@ -60,7 +60,6 @@ private fun OrdersScreenPreview() {
                             id = UUID.randomUUID(),
                             orderedAt = LocalDateTime.now(),
                             orderStatus = OrderStatus.Processing,
-                            products = emptyList(),
                             paymentStatus = PaymentStatus.Pending,
                             toBeDeliveredAt = LocalDateTime.now(),
                             totalAmount = 300.534
@@ -69,7 +68,6 @@ private fun OrdersScreenPreview() {
                             id = UUID.randomUUID(),
                             orderedAt = LocalDateTime.now().plusDays(2),
                             orderStatus = OrderStatus.OnHold,
-                            products = emptyList(),
                             paymentStatus = PaymentStatus.Paid,
                             toBeDeliveredAt = LocalDateTime.now(),
                             totalAmount = 300.534
@@ -78,7 +76,6 @@ private fun OrdersScreenPreview() {
                             id = UUID.randomUUID(),
                             orderedAt = LocalDateTime.now(),
                             orderStatus = OrderStatus.Pending,
-                            products = emptyList(),
                             paymentStatus = PaymentStatus.Paid,
                             toBeDeliveredAt = LocalDateTime.now(),
                             totalAmount = 300.534
@@ -87,7 +84,6 @@ private fun OrdersScreenPreview() {
                             id = UUID.randomUUID(),
                             orderedAt = LocalDateTime.now(),
                             orderStatus = OrderStatus.Processing,
-                            products = emptyList(),
                             paymentStatus = PaymentStatus.Pending,
                             toBeDeliveredAt = LocalDateTime.now(),
                             totalAmount = 300.534
