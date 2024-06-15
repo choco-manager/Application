@@ -8,6 +8,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import ru.dadyarri.choco.navigation.routes.Route
 import ru.dadyarri.choco.system.navigation.NavigationHandler
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
@@ -16,7 +17,7 @@ import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
 fun ChocoApp(
     snackbarMessageHandler: SnackbarMessageHandler,
     navigationHandler: NavigationHandler,
-    navController: NavHostController = rememberNavController()
+    navController: NavHostController = rememberNavController(),
 ) {
 
     val snackbarHostState = remember { SnackbarHostState() }
@@ -51,6 +52,12 @@ fun ChocoApp(
 
         composable<Route.Orders> {
             OrdersScreenRoot(navController)
+        }
+
+        composable<Route.Order> {
+            val args = it.toRoute<Route.Order>()
+
+            OrderScreenRoot(navController, args)
         }
     }
 }

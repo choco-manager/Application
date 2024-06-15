@@ -48,7 +48,7 @@ class OrdersViewModel @Inject constructor(
 
     private fun onOpenOrder(id: UUID) {
         viewModelScope.launch {
-            navigationHandler.navigate(Route.Order(id))
+            navigationHandler.navigate(Route.Order(id.toString()))
         }
     }
 

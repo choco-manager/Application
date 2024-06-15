@@ -1,8 +1,6 @@
 package ru.dadyarri.choco.navigation.routes
 
 import kotlinx.serialization.Serializable
-import ru.dadyarri.choco.serialization.UuidSerializer
-import java.util.UUID
 
 sealed class Route {
     @Serializable
@@ -21,7 +19,7 @@ sealed class Route {
     data object CreateOrder : Route()
 
     @Serializable
-    data class Order(@Serializable(UuidSerializer::class) val id: UUID) : Route()
+    data class Order(val id: String) : Route()
 
     @Serializable
     data object Procurements : Route()
