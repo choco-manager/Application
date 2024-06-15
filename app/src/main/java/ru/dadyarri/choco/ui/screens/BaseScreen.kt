@@ -76,25 +76,6 @@ fun BaseScreen(
                 )
                 .padding(innerPadding)
         ) {
-//        if (!LocalInspectionMode.current) {
-//            val viewModel: TopBarViewModel = hiltViewModel()
-//            val networkState by
-//            viewModel.networkState.collectAsState(ConnectivityObserver.Status.Available)
-//
-//            AnimatedVisibility(
-//                visible = networkState != ConnectivityObserver.Status.Available,
-//                enter = fadeIn() + slideInVertically(
-//                    initialOffsetY = { fullHeight -> -fullHeight },
-//                    animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-//                ),
-//                exit = fadeOut() + slideOutVertically(
-//                    targetOffsetY = { fullHeight -> -fullHeight },
-//                    animationSpec = tween(durationMillis = 500, easing = FastOutSlowInEasing)
-//                )
-//            ) {
-//                NoInternetAvailable()
-//            }
-//        }
             PullToRefreshBox(
                 isRefreshing = isRefreshing,
                 onRefresh = onRefresh

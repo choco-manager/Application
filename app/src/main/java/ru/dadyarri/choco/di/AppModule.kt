@@ -11,6 +11,8 @@ import ru.dadyarri.choco.networking.AuthManager
 import ru.dadyarri.choco.networking.HttpClientFactory
 import ru.dadyarri.choco.storage.DataStoreManager
 import ru.dadyarri.choco.system.navigation.NavigationHandler
+import ru.dadyarri.choco.system.network.ConnectivityObserver
+import ru.dadyarri.choco.system.network.NetworkConnectivityObserver
 import ru.dadyarri.choco.system.snackbar.SnackbarMessageHandler
 import javax.inject.Singleton
 
@@ -52,5 +54,11 @@ object AppModule {
     @Singleton
     fun provideHttpClient(): HttpClient {
         return HttpClientFactory.httpClient
+    }
+
+    @Provides
+    @Singleton
+    fun provideConnectivityObserver(@ApplicationContext context: Context): ConnectivityObserver {
+        return NetworkConnectivityObserver(context)
     }
 }
