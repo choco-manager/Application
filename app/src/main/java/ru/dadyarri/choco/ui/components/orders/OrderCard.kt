@@ -37,6 +37,7 @@ import ru.dadyarri.choco.domain.orders.data.OrderDto
 import ru.dadyarri.choco.domain.orders.data.OrderStatus
 import ru.dadyarri.choco.domain.orders.data.PaymentStatus
 import ru.dadyarri.choco.util.format
+import ru.dadyarri.choco.util.formatRelative
 import java.util.UUID
 
 @Composable
@@ -73,6 +74,23 @@ fun OrderCard(
             Text(
                 text = stringResource(R.string.price, order.totalAmount),
                 style = MaterialTheme.typography.labelSmall
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+
+            Text(
+                text = stringResource(
+                    id = R.string.deliver_in,
+                    order.toBeDeliveredAt.formatRelative()
+                ),
+                style = MaterialTheme.typography.titleMedium
             )
         }
 
