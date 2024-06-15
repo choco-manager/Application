@@ -1,8 +1,9 @@
 package ru.dadyarri.choco.ui.components.orders
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Cancel
@@ -14,16 +15,19 @@ import androidx.compose.material.icons.outlined.PendingActions
 import androidx.compose.material.icons.outlined.Schema
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
@@ -46,50 +50,66 @@ fun OrderCard(
     var orderStatusMenuStatus by remember { mutableStateOf(false) }
     var paymentStatusMenuStatus by remember { mutableStateOf(false) }
 
-    ListItem(
-        headlineContent = {
-            Text(stringResource(R.string.order_title, order.orderedAt.format()))
-        },
-        supportingContent = {
-            Column(
-                verticalArrangement = Arrangement.spacedBy(6.dp),
-            ) {
-                AssistChip(
-                    onClick = {
-                        orderStatusMenuStatus = true
-                    },
-                    label = { Text(getOrderStatusLabel(order.orderStatus)) },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = getOrderStatusIcon(order.orderStatus),
-                            contentDescription = null,
-                            Modifier.size(AssistChipDefaults.IconSize)
-                        )
-                    }
-                )
-                AssistChip(
-                    onClick = {
-                        paymentStatusMenuStatus = true
-                    },
-                    label = { Text(getPaymentStatusLabel(order.paymentStatus)) },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = getPaymentStatusIcon(order.paymentStatus),
-                            contentDescription = null,
-                            Modifier.size(AssistChipDefaults.IconSize)
-                        )
-                    }
-                )
-            }
-        },
-        trailingContent = {
-            Text(text = stringResource(R.string.price, order.totalAmount))
-        },
+    Card(
+        colors = CardDefaults.cardColors(),
         modifier = Modifier
-            .clickable {
-                onClick(order.id)
-            }
-    )
+            .fillMaxWidth()
+            .padding(vertical = 6.dp),
+        onClick = {
+            onClick(order.id)
+        }
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = stringResource(R.string.order_title, order.orderedAt.format()),
+                style = MaterialTheme.typography.titleMedium
+            )
+            Text(
+                text = stringResource(R.string.price, order.totalAmount),
+                style = MaterialTheme.typography.labelSmall
+            )
+        }
+
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(6.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            AssistChip(
+                onClick = {
+                    orderStatusMenuStatus = true
+                },
+                label = { Text(getOrderStatusLabel(order.orderStatus)) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = getOrderStatusIcon(order.orderStatus),
+                        contentDescription = null,
+                        Modifier.size(AssistChipDefaults.IconSize)
+                    )
+                }
+            )
+            AssistChip(
+                onClick = {
+                    paymentStatusMenuStatus = true
+                },
+                label = { Text(getPaymentStatusLabel(order.paymentStatus)) },
+                leadingIcon = {
+                    Icon(
+                        imageVector = getPaymentStatusIcon(order.paymentStatus),
+                        contentDescription = null,
+                        Modifier.size(AssistChipDefaults.IconSize)
+                    )
+                }
+            )
+        }
+    }
 
     DropdownMenu(
         expanded = orderStatusMenuStatus,
